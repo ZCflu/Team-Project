@@ -19,7 +19,7 @@ public class Menu extends JFrame{
         setBackground();
     }
     private void setBackground(){
-        bgImage = new ImageIcon("data/Images/background.jpg");
+        bgImage = new ImageIcon("Project Folder/data/Images/background.jpg");
         background = new JLabel(addImages(bgImage,2,2));
         background.setLayout(new GridBagLayout());
         add(background,BorderLayout.CENTER);
