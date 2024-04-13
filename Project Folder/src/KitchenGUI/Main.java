@@ -1,6 +1,11 @@
 package KitchenGUI;
+
+import FOHtoKitchen.KitchenAPI;
 import FrontOfHouse.FOH;
-import Kitchen.*;
+import Kitchen.Dish;
+import Kitchen.Ingredient;
+import Kitchen.Menu;
+import Kitchen.Order;
 import Management.MNG;
 import Management.MNGInterface;
 
@@ -15,6 +20,7 @@ public class Main {
         //tests1();
         //tests2();
         Authentication auth = new Authentication();
+
         //MainMenu menu = new MainMenu();
     }
 

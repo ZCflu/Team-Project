@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenu extends GUIMenu {
+    private String username;
     private int currentMenuOpen;
     private OrderMenu orderMenu;
     private JLabel kitchenLabel,welcomeLabel,selectOptionLabel;
@@ -15,7 +16,8 @@ public class MainMenu extends GUIMenu {
     private ImageIcon bgImage,kitchenIcon;
     private JButton button1,button2,button3,button4;
     private ActionListener option1,option2,option3,option4;
-    public MainMenu(){
+    public MainMenu(String username){
+        this.username=username;
         currentMenuOpen=0;
         showMenu();
         orderMenu = new OrderMenu();
@@ -34,7 +36,10 @@ public class MainMenu extends GUIMenu {
 
 
     private void header(){
-        welcomeLabel = new JLabel("Welcome Chef");
+        ImageIcon image = new ImageIcon("Project Folder/data/Images/fxiconkitchen.png");
+        Image img = image.getImage();
+        setIconImage(img);
+        welcomeLabel = new JLabel("Welcome "+username);
         selectOptionLabel = new JLabel("Please select an option above");
         selectOptionLabel.setFont(new Font("Ariel",1,24));
         welcomeLabel.setFont(new Font("Ariel",1,24));

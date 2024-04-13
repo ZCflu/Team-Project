@@ -1,63 +1,120 @@
 package KitchenGUI;
-import java.util.List;
+
+
+import FOHtoKitchen.Order;
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
-import Kitchen.*;
+import java.util.List;
 
 public class Ticket extends JPanel {
+    private JComboBox selectProgress;
+    private Order order;
     private int gridYAmount;
-    private List<Dish> dishList;
+    private String additionals;
+    private int orderID;
+    private List<FOHtoKitchen.Dish> dishList;
     private JLabel timeLabel;
     private JLabel dishesHeaderLabel;
-    GridBagLayout gbl = new GridBagLayout();
-    GridBagConstraints gbc = new GridBagConstraints();
+    private OrderMenu orderMenu;
     LineBorder border = new LineBorder(Color.BLACK,2);
-    LayoutManager layoutManager;
-    public Ticket(List<Dish> dishes){
+    public Ticket(int OrderID, List<FOHtoKitchen.Dish> dishes, String specialRequests, Order order,OrderMenu orderMenu){
+        this.orderMenu = orderMenu;
+        this.order=order;
+        this.additionals=specialRequests;
         this.dishList = dishes;
+        this.orderID=OrderID;
         addAttributes();
     }
-    private void addAttributes(){
-        setOpaque(false);
+
+    private void buttonsMake(){
+        String[] options = { "Not Started", "Preparing", "Cooking", "Serving", "Done" };
+        selectProgress = new JComboBox(options);
+        JLabel select = new JLabel("Update Order: ");
+        add(select,"wrap,newline 25");
+        add(selectProgress,"wrap");
+        JButton sendProgress = new JButton("Submit");
+        ActionListener progressListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String option = selectProgress.getSelectedItem().toString();
+                System.out.println(order.getOrderStatus());
+                order.setOrderStatus(option);
+            }
+        };
+        sendProgress.addActionListener(progressListener);
+
+        add(sendProgress);
+
+
+        JButton removeTicket = new JButton("Remove Ticket");
+        ActionListener removeListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                orderMenu.removeTicket(Ticket.this);
+            }
+        };
+
+        removeTicket.addActionListener(removeListener);
+
+        add(removeTicket,"wrap");
+    }
+
+    private void ticketBackground(){
+
+
+    }
+
+    private void addAttributes() {
+        // Set background color before adding components
+        //setBackground(Color.decode("#424242"));
+
+        MigLayout mig = new MigLayout();
+        setLayout(mig);
+        setOpaque(true); // Ensure the panel is opaque
         setBorder(border);
-        setLayout(gbl);
-        gbc.insets = new Insets(10, 0, 10, 10);
-        gbc.gridy = 1;
-        JLabel ticketNumber = new JLabel("KitchenGUI.Ticket Number:  1");
-        add(ticketNumber,gbc);
 
-        gbc.gridy=2;
-        JLabel tableNumber = new JLabel("Table Number:  1");
-        add(tableNumber,gbc);
+        JLabel ticketNumber = new JLabel("Order ID: " + orderID);
+        add(ticketNumber);
+        JLabel tableNumber = new JLabel("Table Number: Not Available");
+        add(tableNumber, "wrap");
 
-        gbc.gridx = 3;
-        gbc.gridy=1;
         timeLabel = new JLabel("Time Alive: 00:00:00");
-        add(timeLabel, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy=3;
-        gridYAmount =3;
+        add(timeLabel, "wrap");
+        gridYAmount = 3;
         dishesHeaderLabel = new JLabel("Dishes:");
 
-        add(dishesHeaderLabel, gbc);
+        add(dishesHeaderLabel, "wrap");
         addDishes();
+        addAdditionalInformation();
+        buttonsMake();
         timerSet();
     }
+
     private void addDishes(){
-
-        for(Dish d : dishList){
-            JLabel dishlabel = new JLabel(d.getDishName());
-            gbc.gridy = gridYAmount+1;
-            add(dishlabel,gbc);
-
+        for(FOHtoKitchen.Dish d : dishList){
+            int quantity = d.getQuantity();
+            JLabel dishQuantity = new JLabel(String.valueOf(quantity));
+            add(dishQuantity);
+            JLabel dishlabel = new JLabel(d.getName());
+            add(dishlabel,"wrap");
         }
-
     }
+    private void addAdditionalInformation(){
+        if(!additionals.isEmpty()){
+            JLabel important = new JLabel("Additional Information: ");
+            add(important,"wrap,newline 25");
+            JLabel additionalsLabel = new JLabel(additionals);
+            add(additionalsLabel,"wrap");
+        }
+    }
+
 
     private void timerSet(){
         Timer timer = new Timer(1000, new ActionListener() {
@@ -79,6 +136,9 @@ public class Ticket extends JPanel {
         DecimalFormat formatter = new DecimalFormat("00");
         String timeString = formatter.format(hours) + ":" + formatter.format(minutes) + ":" + formatter.format(seconds);
         timeLabel.setText("Time Alive: " + timeString);
+    }
+    public Order getOrder(){
+        return order;
     }
 
 }

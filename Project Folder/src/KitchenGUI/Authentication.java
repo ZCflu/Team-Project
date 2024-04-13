@@ -16,7 +16,11 @@ public class Authentication extends JFrame {
     private JPanel panel;
     private JButton loginButton;
     private JTextField userField,passField;
+    private scaleImage scaler;
+    private GridBagConstraints gbc;
+    private JLabel incorrect;
     public Authentication(){
+        scaler = new scaleImage();
         setAttributes();
         addPanel();
         show();
@@ -24,39 +28,61 @@ public class Authentication extends JFrame {
     }
 
     private void setAttributes(){
-        setSize(500,500);
+        setSize(800,800);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     private void addPanel(){
         panel = new JPanel();
-        GridBagConstraints gbc = new GridBagConstraints();
+        setResizable(false);
+        gbc = new GridBagConstraints();
+        gbc.insets= new Insets(30,1,1,1);
+        gbc.anchor=GridBagConstraints.PAGE_START;
         panel.setLayout(new GridBagLayout());
+        ImageIcon image = new ImageIcon("Project Folder/data/Images/fxiconkitchen.png");
+        Image img = image.getImage();
+        setIconImage(img);
+        JLabel kitchenIcon = new JLabel(scaler.scaleImg(image,150));
+        gbc.gridy=1;
+        gbc.gridx=0;
+        panel.add(kitchenIcon,gbc);
+        gbc.gridy=2;
+
         JLabel Lancasters = new JLabel("Lancaster's Kitchen Login Page");
-        panel.add(Lancasters);
+        panel.add(Lancasters,gbc);
         JLabel username = new JLabel("Username");
         gbc.insets= new Insets(15,1,1,1);
-        gbc.gridy=1;
+        gbc.gridy=3;
         panel.add(username,gbc);
         userField = new JTextField(15);
-        gbc.gridy=2;
+        gbc.gridy=4;
         panel.add(userField,gbc);
         JLabel password = new JLabel("Password");
-        gbc.gridy=3;
+        gbc.gridy=5;
         panel.add(password,gbc);
 
-        passField = new JTextField(15);
-        gbc.gridy=4;
+        passField = new JPasswordField(15);
+
+        gbc.gridy=6;
         panel.add(passField,gbc);
 
-        loginButton = new JButton("Login");
-        gbc.gridy=5;
-        panel.add(loginButton,gbc);
 
+        ImageIcon loginB = new ImageIcon("Project Folder/data/Images/LoginUI/button_login.png");
+        ImageIcon loginHover = new ImageIcon("Project Folder/data/Images/LoginUI/button_login_hover.png");
+        loginButton = new JButton(loginB);
+        loginButton.setPreferredSize(new Dimension(loginB.getIconWidth(),loginB.getIconHeight()));
+        loginButton.setBorder(null);
+        loginButton.setContentAreaFilled(false);
+        loginButton.setRolloverIcon(loginHover);
+        gbc.gridy=7;
+        panel.add(loginButton,gbc);
         loginButton.addActionListener(actionListener);
+
+        incorrectDetails();
 
         add(panel);
     }
+
 
 
     ActionListener actionListener = new ActionListener() {
@@ -88,13 +114,29 @@ public class Authentication extends JFrame {
             }
         if (Objects.equals(username, userActual) && Objects.equals(password, passActual)){
             System.out.println("Correct Credentials");
+            incorrect.setForeground(Color.GREEN);
+            incorrect.setText("Logging in");
             dispose();
-            MainMenu menu = new MainMenu();
+            MainMenu menu = new MainMenu(username);
         }
         else if(!Objects.equals(username, userActual) && !Objects.equals(password, passActual)){
+            incorrect.setText("Username or Password is incorrect");
+            repaint();
             System.out.println("Incorrect");
         }
 
 
     }
+
+    private void incorrectDetails(){
+        incorrect = new JLabel("                                          ");
+        incorrect.setForeground(Color.red);
+        gbc.gridx=0; // Center horizontally
+        gbc.gridy=8; // Place it at the bottom
+        gbc.gridwidth = 2; // Span over two columns
+        gbc.anchor = GridBagConstraints.CENTER; // Center horizontally
+
+        panel.add(incorrect,gbc);
+    }
+
 }
