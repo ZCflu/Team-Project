@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class Authentication extends JFrame {
     private JPanel panel;
@@ -74,20 +75,25 @@ public class Authentication extends JFrame {
             Connection con = database.returnConnection();
             String username = userField.getText();
             String password = passField.getText();
+            String userActual=null;
+            String passActual=null;
             PreparedStatement authState = con.prepareStatement("SELECT * FROM Authentication WHERE Username=? AND Password=?");
             authState.setString(1,username);
             authState.setString(2,password);
             ResultSet results = authState.executeQuery();
             while(results.next()){
-                String userActual = results.getString(1);
-                String passActual = results.getString(2);
-                if (username == userActual && password==passActual){
-                    System.out.println("Correct Credentials");
-                }
-                else{
-                    System.out.println("Incorrect");
-                }
+                userActual = results.getString(1);
+                passActual = results.getString(2);
+                System.out.println(userActual+" "+username+" "+passActual+" "+password);
             }
+        if (Objects.equals(username, userActual) && Objects.equals(password, passActual)){
+            System.out.println("Correct Credentials");
+            dispose();
+            MainMenu menu = new MainMenu();
+        }
+        else if(!Objects.equals(username, userActual) && !Objects.equals(password, passActual)){
+            System.out.println("Incorrect");
+        }
 
 
     }
