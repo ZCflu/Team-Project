@@ -1,5 +1,6 @@
 package FrontOfHouse;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -12,7 +13,7 @@ public interface FOHInterface {
      * 
      * @return A map containing Item IDs as keys and availability status IDs as values.
      */
-    public Map<String, Integer> getDishAvailabilityUpdates();
+    public Map<String, Integer> getDishAvailabilityUpdates() throws SQLException;
 
     /**
      * Method to send and confirm special requests.

@@ -16,7 +16,6 @@ public class OrderMenu extends JPanel {
         ticketsPanel = new JPanel();
         ticketsPanel.setLayout(new GridLayout(0, ticketsPerRow)); // 0 rows, as many columns as needed
         add(new JScrollPane(ticketsPanel), BorderLayout.NORTH); // Add a scroll pane to handle overflow
-
         ticketAmount = 0;
         ticketTest = 5;
         testTickets();

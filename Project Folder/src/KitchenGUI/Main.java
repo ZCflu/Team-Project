@@ -1,24 +1,25 @@
 package KitchenGUI;
-import DatabaseConnection.databaseConnect;
+import FrontOfHouse.FOH;
 import Kitchen.*;
 import Management.MNG;
 import Management.MNGInterface;
 
-import javax.sound.midi.Soundbank;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
 
 
     public static void main(String[] args) throws SQLException {
-        tests();
-        MainMenu menu = new MainMenu();
+        //tests1();
+        //tests2();
+        Authentication auth = new Authentication();
+        //MainMenu menu = new MainMenu();
     }
 
 
-    private static void tests() throws SQLException {
-
+    private static void tests1() throws SQLException {
         MNGInterface test = new MNG();
         Menu testmen = test.getMenu(1);
         Menu testmen2 = test.getMenuByDate(20240410);
@@ -57,6 +58,16 @@ public class Main {
                 System.out.println("Dish3: "+d.getDishName());
             }
         }
+    }
+    private static void tests2() throws SQLException {
+        FOH foh = new FOH();
+        Map<String,Integer> map = foh.getDishAvailabilityUpdates();
+        for (String s : map.keySet()){
+            System.out.println("Dish: "+s+" "+"Availability: "+map.get(s));
+        }
+
+
+
     }
 
 }

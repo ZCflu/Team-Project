@@ -32,6 +32,7 @@ public class MainMenu extends GUIMenu {
     }
 
 
+
     private void header(){
         welcomeLabel = new JLabel("Welcome Chef");
         selectOptionLabel = new JLabel("Please select an option above");

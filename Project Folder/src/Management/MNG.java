@@ -1,9 +1,10 @@
 package Management;
 
-import DatabaseConnection.databaseConnect;
+import DatabaseConnection.databaseDataCon;
 import Kitchen.*;
 
 
+import java.lang.reflect.GenericDeclaration;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,23 +12,18 @@ import java.util.List;
 public class MNG implements MNGInterface {
     private PreparedStatement menuState, dishState, dishState2, recipeState, ingState, ingState2;
     private Connection con;
-    private databaseConnect database;
-
-    public MNG() {
-        databaseConnect database;
-        {
-            try {
-                database = new databaseConnect();
-                con = database.returnConnection();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+    private databaseDataCon database;
+    private void closeConnection() throws SQLException {
+        database.endConnection(con);
             }
-        }
-    }
-
+    private void startConnection() throws SQLException {
+        database = new databaseDataCon();
+        con = new databaseDataCon().returnConnection();
+            }
 
     @Override
     public Menu getMenu(int menuID) throws SQLException {
+        startConnection();
         int ID = 0;
         int creationDate = 0;
         List<Dish> dishes = new ArrayList<>();
@@ -84,11 +80,13 @@ public class MNG implements MNGInterface {
                 }
             }
         }
+        closeConnection();
         return new Menu(ID, creationDate, dishes);
     }
 
     @Override
     public Menu getMenuByDate(int approvalDate) throws SQLException {
+        startConnection();
         int ID = 0;
         int creationDate = 0;
         List<Dish> dishes = new ArrayList<>();
@@ -148,12 +146,14 @@ public class MNG implements MNGInterface {
 
             }
         }
+        closeConnection();
         return new Menu(ID, creationDate, dishes);
     }
 
 
     @Override
     public List<Menu> getMenuRange(int initialDate, int endDate) throws SQLException {
+        startConnection();
         List <Menu> menuList = new ArrayList<>();
         int ID = 0;
         int creationDate = 0;
@@ -216,11 +216,13 @@ public class MNG implements MNGInterface {
             menu = new Menu(ID, creationDate, dishes);
             menuList.add(menu);
         }
+        closeConnection();
         return menuList;
     }
 
     @Override
     public Dish getDish(int dishID) throws SQLException {
+        startConnection();
         Recipe recipe = null;
         Dish dish;
         String dishName="No Dish";
@@ -258,11 +260,13 @@ public class MNG implements MNGInterface {
             recipe = new Recipe(recipeID, recipeName, ingredients);
 
         }
+        closeConnection();
         return new Dish(dishID, dishName,recipe);
     }
 
     @Override
     public Order getOrder(int orderID) throws SQLException {
+        startConnection();
         int creationDate=0;
         List<Ingredient> ingredients = new ArrayList<>();
         double intAmount=0;
@@ -292,11 +296,13 @@ public class MNG implements MNGInterface {
 
             }
         }
+        closeConnection();
         return new Order(orderID,creationDate,ingredients);
     }
 
     @Override
     public Order getOrderByDate(int orderDate) throws SQLException {
+        startConnection();
         int orderID=0;
         List<Ingredient> ingredients = new ArrayList<>();
         double intAmount=0;
@@ -324,11 +330,13 @@ public class MNG implements MNGInterface {
                 }
             }
         }
+        closeConnection();
         return new Order(orderID,orderDate,ingredients);
     }
 
     @Override
     public List<Order> getOrderRange(int initialDate, int endDate) throws SQLException {
+        startConnection();
         int orderID=0;
         List<Order> Orders = new ArrayList<>();
         List<Ingredient> ingredients = new ArrayList<>();
@@ -360,6 +368,7 @@ public class MNG implements MNGInterface {
             }
             Orders.add(new Order(orderID,orderDate,ingredients));
         }
+        closeConnection();
         return Orders;
     }
 }

@@ -1,6 +1,6 @@
 package Kitchen;
 
-import DatabaseConnection.databaseConnect;
+import DatabaseConnection.databaseAdmin;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * The Kitchen.Order class represents an order placed for ingredients from the kitchen.
  */
 public class Order {
-    private databaseConnect database;
+    private databaseAdmin database;
     private char IDType; // Type identifier ('O' for order)
     private int orderID; // Unique identifier for the order
     private int orderDate; // Date when the order was placed
