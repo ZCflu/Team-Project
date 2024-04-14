@@ -1,184 +1,229 @@
 package KitchenGUI;
 
 import KitchenGUI.GUIMenu;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class MainMenu extends GUIMenu {
     private String username;
+    private JPanel menuPanel;
+    private MigLayout mig;
     private int currentMenuOpen;
     private OrderMenu orderMenu;
+    private MenuManagement menuManagement;
     private JLabel kitchenLabel,welcomeLabel,selectOptionLabel;
     private JPanel menuMainPanel,buttonPanel;
     private ImageIcon bgImage,kitchenIcon;
     private JButton button1,button2,button3,button4;
-    private ActionListener option1,option2,option3,option4;
+    private ActionListener homeOption,ticketsOption,menuOption,stockOption,wasteOption,exitOption;
+    private Font abrilFont;
     public MainMenu(String username){
         this.username=username;
         currentMenuOpen=0;
-        showMenu();
+        addFont();
+        //showMenu();
+        migLay();
         orderMenu = new OrderMenu();
+        menuManagement = new MenuManagement();
     }
-    private void frameAttributes(){
-        mouseListener();
-        header();
-        menuOptions();
+    private void addFont(){
+        try {
+            abrilFont = Font.createFont(Font.TRUETYPE_FONT, new File("Project Folder/data/Fonts/AbrilFatface-Regular.otf"));
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(abrilFont);
+        } catch (FontFormatException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
-    private void showMenu(){
-        frameAttributes();
+    private void migLay(){
+        mig = new MigLayout();
+        menuPanel = new JPanel();
+        menuPanel.setLayout(mig);
+        menuPanel.setOpaque(true);
+        menuPanel.setBackground(Color.decode("#2B3336"));
+
+        JLabel userName = new JLabel("Welcome "+username);
+        menuPanel.add(userName,"wrap");
+
+        ImageIcon logo = new ImageIcon("Project Folder/data/Images/lancasterlogo.jpeg");
+        menuPanel.add(new JLabel(addImages(logo,4,4)),"wrap");
+        migLayButtons();
+        add(menuPanel,BorderLayout.WEST);
         repaint();
         show();
     }
+    private void migLayButtons(){
+        JButton HomeButton = new JButton("Home");
+        JButton TicketsButton = new JButton("Tickets");
+        JButton MenuManButton = new JButton("Menu Management");
+        JButton StockButton = new JButton("Stock Control");
+        JButton WasteButton = new JButton("Waste Control");
+        JButton ExitButton = new JButton("Exit");
+
+        HomeButton.setForeground(Color.decode("#A9A8A6"));
+        TicketsButton.setForeground(Color.decode("#A9A8A6"));
+        MenuManButton.setForeground(Color.decode("#A9A8A6"));
+        StockButton.setForeground(Color.decode("#A9A8A6"));
+        WasteButton.setForeground(Color.decode("#A9A8A6"));
+        ExitButton.setForeground(Color.decode("#A9A8A6"));
+
+        HomeButton.setFocusPainted(false);
+        TicketsButton.setFocusPainted(false);
+        MenuManButton.setFocusPainted(false);
+        StockButton.setFocusPainted(false);
+        WasteButton.setFocusPainted(false);
+        ExitButton.setFocusPainted(false);
+
+        HomeButton.setBackground(Color.decode("#242b2e"));
+        TicketsButton.setBackground(Color.decode("#242b2e"));
+        MenuManButton.setBackground(Color.decode("#242b2e"));
+        StockButton.setBackground(Color.decode("#242b2e"));
+        WasteButton.setBackground(Color.decode("#242b2e"));
+        ExitButton.setBackground(Color.decode("#242b2e"));
 
 
+        HomeButton.setFont(abrilFont.deriveFont(Font.PLAIN,20));
+        TicketsButton.setFont(abrilFont.deriveFont(Font.PLAIN,20));
+        MenuManButton.setFont(abrilFont.deriveFont(Font.PLAIN,20));
+        StockButton.setFont(abrilFont.deriveFont(Font.PLAIN,20));
+        WasteButton.setFont(abrilFont.deriveFont(Font.PLAIN,20));
+        ExitButton.setFont(abrilFont.deriveFont(Font.PLAIN,20));
 
-    private void header(){
-        ImageIcon image = new ImageIcon("Project Folder/data/Images/fxiconkitchen.png");
-        Image img = image.getImage();
-        setIconImage(img);
-        welcomeLabel = new JLabel("Welcome "+username);
-        selectOptionLabel = new JLabel("Please select an option above");
-        selectOptionLabel.setFont(new Font("Ariel",1,24));
-        welcomeLabel.setFont(new Font("Ariel",1,24));
-        kitchenIcon = new ImageIcon("data/Images/kitchenicon.png");
-        kitchenLabel = new JLabel(addImages(kitchenIcon,1,1));
-
-        mainMenuPanelAttributes();
-        gbc.gridy = 0;
-        gbc.insets = new Insets(10, 0, 10, 0);
-        //background.add(kitchenLabel,gbc);
-        menuMainPanel.add(kitchenLabel,gbc);
-        gbc.gridy = 1;
-        //background.add(welcomeLabel,gbc);
-        menuMainPanel.add(welcomeLabel,gbc);
-        gbc.gridy = 2;
-        menuMainPanel.add(selectOptionLabel,gbc);
-        background.add(menuMainPanel);
-        menuMainPanel.repaint();
-       // background.add(selectOptionLabel,gbc);
-    }
-    private void mainMenuPanelAttributes(){
-        menuMainPanel = new JPanel();
-        menuMainPanel.setLayout(new GridBagLayout());
-        menuMainPanel.setOpaque(false);
-    }
-    private void menuOptions() {
-        buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        button1 = new JButton("Kitchen Orders");
-        button2 = new JButton("Kitchen.Menu Management");
-        button3 = new JButton("Waste Management");
-        button4 = new JButton("Option 4");
+        mouseListener(HomeButton,TicketsButton,MenuManButton,StockButton,WasteButton,ExitButton);
 
 
-        // Set preferred size for buttons
-        Dimension buttonSize = new Dimension(200, 50);
-        button1.setPreferredSize(buttonSize);
-        button2.setPreferredSize(buttonSize);
-        button3.setPreferredSize(buttonSize);
-        button4.setPreferredSize(buttonSize);
+        Dimension buttonSize = new Dimension(100,200);
+        HomeButton.setSize(buttonSize);
+        menuPanel.add(HomeButton,"wrap 2,grow,newline 50,pushy 50");
+        menuPanel.add(TicketsButton,"wrap 2,grow,newline 50,pushy 50");
+        menuPanel.add(MenuManButton,"wrap 2,grow,newline 50,pushy 50");
+        menuPanel.add(StockButton,"wrap 2,grow,newline 50,pushy 50");
+        menuPanel.add(WasteButton,"wrap 2,grow,newline 50,pushy 50");
+        menuPanel.add(ExitButton,"wrap 2,grow,newline 50,pushy 50");
 
-        // Set font for buttons
-        Font buttonFont = new Font("Arial", Font.BOLD, 18);
-        button1.setFont(buttonFont);
-        button2.setFont(buttonFont);
-        button3.setFont(buttonFont);
-        button4.setFont(buttonFont);
-
-        button1.setBorder(null);
-        button2.setBorder(null);
-        button3.setBorder(null);
-        button4.setBorder(null);
-
-        button1.addActionListener(option1);
-        button2.addActionListener(option2);
-        button3.addActionListener(option3);
-        button4.addActionListener(option4);
-
-
-        buttonPanel.add(button1);
-        buttonPanel.add(button2);
-        buttonPanel.add(button3);
-        buttonPanel.add(button4);
-
-        add(buttonPanel, BorderLayout.NORTH);
-    }
-    private void hideButtons(){
-//        button1.setVisible(false);
-//        button2.setVisible(false);
-//        button3.setVisible(false);
-//        button4.setVisible(false);
-        kitchenLabel.setVisible(false);
-        selectOptionLabel.setVisible(false);
-        welcomeLabel.setVisible(false);
-    }
-    private void showButtons(){
-        kitchenLabel.setVisible(true);
-        selectOptionLabel.setVisible(true);
-        welcomeLabel.setVisible(true);
     }
 
-    private void mouseListener(){
-        option1 = new ActionListener() {
+    private void mouseListener(JButton homeButton,JButton ticketsButton,JButton menuManagement,JButton stockButton,JButton wasteButton,JButton exitButton){
+        homeOption = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                removeCurrentMenu();
                 changeMenu(1);
                 currentMenuOpen=1;
             }
         };
-        option2 = new ActionListener() {
+       ticketsOption = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                removeCurrentMenu();
                 currentMenuOpen=2;
                 changeMenu(2);
             }
         };
-        option3 = new ActionListener() {
+        menuOption = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                removeCurrentMenu();
                 currentMenuOpen=3;
                 changeMenu(3);
 
             }
         };
-        option4 = new ActionListener() {
+        stockOption = new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
+                removeCurrentMenu();
                 currentMenuOpen=4;
                 changeMenu(4);
             }
         };
+        wasteOption = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeCurrentMenu();
+                currentMenuOpen=5;
+                changeMenu(5);
+            }
+        };
+        exitOption = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeCurrentMenu();
+                currentMenuOpen=6;
+                changeMenu(6);
+            }
+        };
+        homeButton.addActionListener(homeOption);
+        ticketsButton.addActionListener(ticketsOption);
+        menuManagement.addActionListener(menuOption);
+        stockButton.addActionListener(stockOption);
+        wasteButton.addActionListener(wasteOption);
+        exitButton.addActionListener(exitOption);
     }
 
     private void changeMenu(int menuID){
         switch (menuID){
             case 1:
-                if(currentMenuOpen==1){
-                    break;
-                }
-                System.out.println("Show the Tickets");
-                menuMainPanel.setVisible(false);
-                background.setLayout(new BorderLayout());
-                background.add(orderMenu,BorderLayout.WEST);
-                orderMenu.setVisible(true);
+                System.out.println("Home Button");
 
-
-                currentMenuOpen=1;
                 break;
             case 2:
-                System.out.println("Show the Kitchen.Menu Management System");
+                System.out.println("Show the Tickets");
+                //background.setLayout(new BorderLayout());
+                add(orderMenu,BorderLayout.CENTER);
+                revalidate();
+                repaint();
+                orderMenu.setVisible(true);
                 break;
             case 3:
                 System.out.println("Show the Waste Management System");
+                add(menuManagement,BorderLayout.CENTER);
+                revalidate();
+                repaint();
+                menuManagement.setVisible(true);
                 break;
             case 4:
-                System.out.println("KitchenGUI.Main Kitchen.Menu");
-                menuMainPanel.setVisible(true);
-                if(orderMenu!= null){
-                    orderMenu.setVisible(false);
-                }
+                break;
+            case 5:
+                break;
+            case 6:
+                System.exit(0);
+                break;
+
         }
+    }
+
+    private void removeCurrentMenu(){
+        System.out.println(currentMenuOpen);
+        switch (currentMenuOpen){
+            case 1:
+                System.out.println("gets here?");
+                orderMenu.setVisible(false);
+                menuManagement.setVisible(false);
+                break;
+            case 2:
+                orderMenu.setVisible(false);
+                break;
+            case 3:
+                menuManagement.setVisible(false);
+                break;
+
+
+
+        }
+        repaint();
+        revalidate();
+
+
     }
 }

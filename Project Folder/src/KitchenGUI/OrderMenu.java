@@ -15,14 +15,14 @@ public class OrderMenu extends JPanel {
     private int ticketAmount;
     private int ticketTest;
     private JPanel ticketsPanel;
-    private int ticketsPerRow = 7; // Adjust as needed
+    private int ticketsPerRow = 6; // Adjust as needed
     private int refreshIntervalInSeconds = 30; // Adjust as needed
     private Timer refreshTimer;
     private List<Integer> currentOrders;
 
     public OrderMenu() {
         currentOrders = new ArrayList<>();
-        setBackground(Color.decode("#424242"));
+        setBackground(Color.decode("#3d4547"));
         setLayout(new BorderLayout());
         ticketsPanel = new JPanel();
         ticketsPanel.setLayout(new GridLayout(0, ticketsPerRow)); // 0 rows, as many columns as needed

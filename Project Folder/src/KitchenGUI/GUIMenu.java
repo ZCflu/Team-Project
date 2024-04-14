@@ -11,6 +11,12 @@ public class GUIMenu extends JFrame{
         frameAttributes();
     }
     private void frameAttributes(){
+        getContentPane().setBackground(Color.decode("#3d4547"));
+        repaint();
+
+        ImageIcon image = new ImageIcon("Project Folder/data/Images/fxiconkitchen.png");
+        Image img = image.getImage();
+        setIconImage(img);
         gbc = new GridBagConstraints();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -20,10 +26,11 @@ public class GUIMenu extends JFrame{
         setBackground();
     }
     private void setBackground(){
-        bgImage = new ImageIcon("Project Folder/data/Images/background.jpg");
-        background = new JLabel(addImages(bgImage,2,2));
-        background.setLayout(new GridBagLayout());
-        add(background,BorderLayout.CENTER);
+
+//        bgImage = new ImageIcon("Project Folder/data/Images/background.jpg");
+//        background = new JLabel(addImages(bgImage,2,2));
+//        background.setLayout(new GridBagLayout());
+        //add(background,BorderLayout.CENTER);
 
     }
     private void setSizeFrame(){
@@ -40,5 +47,7 @@ public class GUIMenu extends JFrame{
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         return scaledIcon;
     }
-
+    public void exit(){
+        dispose();
+    }
 }
