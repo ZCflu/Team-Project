@@ -1,5 +1,7 @@
 package FrontOfHouse;
 
+import Kitchen.OrderUpdateListener;
+
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -21,37 +23,22 @@ public interface FOHInterface {
      * @param specialRequests A map containing special request details (e.g., request ID, request description).
      * @return A map containing special request IDs as keys and confirmation status (true if kitchen can fulfill, false otherwise) as values.
      */
-    public Map<String, Boolean> confirmSpecialRequests(Map<String, String> specialRequests);
+    public Map<String, Boolean> confirmSpecialRequests(Map<String, String> specialRequests) throws SQLException;
 
     /**
-     * Method to notify FOH when a dish or an entire order is ready to be served.
+     * Method to check status of an order.
      * 
      * @param orderID ID of the order.
      * @param tableID ID of the table.
-     * @param dishStatus A map containing dish IDs as keys and their preparation status as values.
-     * @return A boolean indicating successful notification.
+     * @return A boolean indicating the outcome.
      */
-    public boolean notifyFOHOrderReady(String orderID, String tableID, Map<String, String> dishStatus);
+    public boolean checkFOhOrderStatus(int orderID, int tableID) throws SQLException;
 
     /**
-     * Method to set up communication mechanism for FOH to be notified when a course is ready for serving.
-     * 
-     * @param listener A listener interface to receive notifications.
+     * Method to get notification if an order is ready.
+     * I have provided listners class aswell
      */
-    public void setFOHNotificationListener(FOHNotificationListener listener);
+    public void notifyFohAboutOrders(OrderUpdateListener listener);
 
-    /**
-     * Listener interface for FOH notifications. Nested interface.
-     */
-    public interface FOHNotificationListener {
-        /**
-         * Method to receive notification when a course is ready for serving.
-         * 
-         * @param orderID ID of the order.
-         * @param tableID ID of the table.
-         * @param courseName Name of the course ready for serving.
-         */
-        public void onCourseReady(String orderID, String tableID, String courseName);
-    }
 }
 

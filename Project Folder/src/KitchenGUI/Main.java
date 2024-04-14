@@ -1,11 +1,7 @@
 package KitchenGUI;
 
-import FOHtoKitchen.KitchenAPI;
 import FrontOfHouse.FOH;
-import Kitchen.Dish;
-import Kitchen.Ingredient;
-import Kitchen.Menu;
-import Kitchen.Order;
+import Kitchen.*;
 import Management.MNG;
 import Management.MNGInterface;
 
@@ -20,6 +16,18 @@ public class Main {
         //tests1();
         //tests2();
         Authentication auth = new Authentication();
+        MNG mng = new MNG();
+        Menu m = mng.getMenu(1);
+        System.out.println(m.getCreationDate());
+        OrderUpdateListener listener = new OrderUpdater();
+        InventoryManagement im = new InventoryManagement();
+        im.getStock();
+        im.updateStock("Carrot", 100);
+
+        //FOH foh = new FOH();
+        //foh.notifyFohAboutOrders(listener);
+        //foh.checkFOhOrderStatus(6, 11);
+
 
         //MainMenu menu = new MainMenu();
     }
@@ -30,7 +38,7 @@ public class Main {
         Menu testmen = test.getMenu(1);
         Menu testmen2 = test.getMenuByDate(20240410);
         List<Menu> testmen3 = test.getMenuRange(20240409,20340409);
-        Dish dishTest = test.getDish(3);
+        dish dishTest = test.getDish(3);
         Order orderTest = test.getOrder(2);
         Order orderTest2 = test.getOrderByDate(20240311);
         List<Order> orderTest3 = test.getOrderRange(20240311,21240350);
@@ -53,14 +61,14 @@ public class Main {
         for(Ingredient i : ingList2){
             System.out.println("Ingredient2: "+ i.getIngredientName());
         }
-        for (Dish d : testmen.getDishes()){
+        for (dish d : testmen.getDishes()){
             System.out.println("Dish1: "+d.getDishName());
         }
-        for (Dish d : testmen2.getDishes()){
+        for (dish d : testmen2.getDishes()){
             System.out.println("Dish2: "+d.getDishName());
         }
         for (Menu m : testmen3){
-            for (Dish d : testmen2.getDishes()){
+            for (dish d : testmen2.getDishes()){
                 System.out.println("Dish3: "+d.getDishName());
             }
         }

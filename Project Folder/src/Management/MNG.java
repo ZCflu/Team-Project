@@ -4,7 +4,6 @@ import DatabaseConnection.databaseDataCon;
 import Kitchen.*;
 
 
-import java.lang.reflect.GenericDeclaration;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ public class MNG implements MNGInterface {
         startConnection();
         int ID = 0;
         int creationDate = 0;
-        List<Dish> dishes = new ArrayList<>();
+        List<dish> dishes = new ArrayList<>();
         List<Ingredient> ingredients = new ArrayList<>();
         menuState = con.prepareStatement("SELECT * FROM Menu WHERE ID=?");
         menuState.setInt(1, menuID);
@@ -75,7 +74,7 @@ public class MNG implements MNGInterface {
 
                     }
                     Recipe recipe = new Recipe(recipeID, recipeName, ingredients);
-                    Dish dish = new Dish(dishID, dishName, recipe);
+                    dish dish = new dish(dishID, dishName, recipe);
                     dishes.add(dish);
                 }
             }
@@ -89,7 +88,7 @@ public class MNG implements MNGInterface {
         startConnection();
         int ID = 0;
         int creationDate = 0;
-        List<Dish> dishes = new ArrayList<>();
+        List<dish> dishes = new ArrayList<>();
         List<Ingredient> ingredients = new ArrayList<>();
         menuState = con.prepareStatement("SELECT * FROM Menu WHERE ChefApprovalDate=?");
         menuState.setInt(1,approvalDate);
@@ -140,7 +139,7 @@ public class MNG implements MNGInterface {
 
                     }
                     Recipe recipe = new Recipe(recipeID, recipeName, ingredients);
-                    Dish dish = new Dish(dishID, dishName, recipe);
+                    dish dish = new dish(dishID, dishName, recipe);
                     dishes.add(dish);
                 }
 
@@ -165,7 +164,7 @@ public class MNG implements MNGInterface {
             Menu menu;
             ID = menuResults.getInt(1);
             creationDate = menuResults.getInt(2);
-            List<Dish> dishes = new ArrayList<>();
+            List<dish> dishes = new ArrayList<>();
             List<Ingredient> ingredients = new ArrayList<>();
 
 
@@ -208,7 +207,7 @@ public class MNG implements MNGInterface {
 
                     }
                     Recipe recipe = new Recipe(recipeID, recipeName, ingredients);
-                    Dish dish = new Dish(dishID, dishName, recipe);
+                    dish dish = new dish(dishID, dishName, recipe);
                     dishes.add(dish);
                 }
 
@@ -221,10 +220,10 @@ public class MNG implements MNGInterface {
     }
 
     @Override
-    public Dish getDish(int dishID) throws SQLException {
+    public dish getDish(int dishID) throws SQLException {
         startConnection();
         Recipe recipe = null;
-        Dish dish;
+        dish dish;
         String dishName="No Dish";
         List<Ingredient> ingredients = null;
         dishState = con.prepareStatement("SELECT * FROM Dish WHERE ID=?");
@@ -261,7 +260,7 @@ public class MNG implements MNGInterface {
 
         }
         closeConnection();
-        return new Dish(dishID, dishName,recipe);
+        return new dish(dishID, dishName,recipe);
     }
 
     @Override

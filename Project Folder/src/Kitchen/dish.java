@@ -4,7 +4,7 @@ package Kitchen;
  * The Kitchen.Dish class represents a dish in the restaurant menu.
  * It contains information about the dish ID, availability status, name, and associated recipe.
  */
-public class Dish {
+public class dish {
     private int dishID; // Unique identifier for the dish
     private int dishAvailability_status_id; // Availability status of the dish
     private String dishName; // Name of the dish
@@ -17,7 +17,7 @@ public class Dish {
      * @param dishName Name of the dish.
      * @param recipe Kitchen.Recipe object representing the ingredients and preparation instructions for the dish.
      */
-    public Dish(int dishID, String dishName, Recipe recipe) {
+    public dish(int dishID, String dishName, Recipe recipe) {
         this.dishID = dishID;
         this.dishName = dishName;
         this.recipe = recipe;
