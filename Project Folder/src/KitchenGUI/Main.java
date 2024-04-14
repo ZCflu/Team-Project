@@ -71,9 +71,6 @@ public class Main {
         for (String s : map.keySet()){
             System.out.println("Dish: "+s+" "+"Availability: "+map.get(s));
         }
-
-
-
     }
 
 }

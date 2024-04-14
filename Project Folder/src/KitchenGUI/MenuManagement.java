@@ -10,18 +10,26 @@ import java.io.File;
 import java.io.IOException;
 
 public class MenuManagement extends JPanel {
-    private BorderLayout borderLay;
+    private viewMenus viewMenu;
+    private editMenu newMenus;
+    private MigLayout migLayout;
     private JButton viewMenus;
     private JButton createMenu;
     private JButton createDish;
     private JButton viewDishes;
     private Font abrilFont;
+    private int currentMenu;
     public MenuManagement(){
+        addMenus();
         addFont();
         initialLayout();
         features();
         addTopMenu();
+    }
 
+    private void addMenus(){
+        viewMenu = new viewMenus();
+        newMenus = new editMenu();
     }
 
     private void addFont(){
@@ -33,15 +41,15 @@ public class MenuManagement extends JPanel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     private void initialLayout(){
-        borderLay = new BorderLayout();
+        migLayout = new MigLayout("align center");
+        setLayout(migLayout);
     }
 
     private void features(){
+        setOpaque(true);
         setBackground(Color.decode("#3d4547"));
 
     }
@@ -53,7 +61,7 @@ public class MenuManagement extends JPanel {
         topMenu.setLayout(migLay);
 
         viewMenus = new JButton("View Menus");
-        createMenu = new JButton("Create Menu");
+        createMenu = new JButton("Edit Menus");
         createDish = new JButton("Create Dish");
         viewDishes = new JButton("View Dishes");
 
@@ -84,9 +92,7 @@ public class MenuManagement extends JPanel {
         topMenu.add(createDish);
         topMenu.add(viewDishes);
 
-
-
-        add(topMenu,BorderLayout.NORTH);
+        add(topMenu,"dock north,wrap");
 
 
 
@@ -97,20 +103,33 @@ public class MenuManagement extends JPanel {
         ActionListener viewMenListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                hideMenu();
+                currentMenu = 1;
                 System.out.println("Viewing Menu's");
-
+                add(viewMenu,"grow");
+                viewMenu.show();
+                repaint();
+                revalidate();
             }
         };
         ActionListener createMenListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                hideMenu();
+                currentMenu = 2;
                 System.out.println("Creating Menus");
+                add(newMenus,"grow,alignx leading");
+                newMenus.show();
+                repaint();
+                revalidate();
 
             }
         };
         ActionListener createDishListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                hideMenu();
+                currentMenu = 3;
                 System.out.println("Creating Dish");
 
             }
@@ -118,6 +137,9 @@ public class MenuManagement extends JPanel {
         ActionListener viewDishListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                hideMenu();
+                currentMenu = 4;
+
                 System.out.println("Viewing Dishes");
 
             }
@@ -130,6 +152,28 @@ public class MenuManagement extends JPanel {
 
 
 
+    }
+
+    private void hideMenu(){
+        switch(currentMenu){
+            case 1:
+                //viewMenu.hide();
+                remove(viewMenu);
+                break;
+            case 2:
+                remove(newMenus);
+                //newMenus.hide();
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+                break;
+
+
+
+        }
     }
 
 

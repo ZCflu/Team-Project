@@ -13,7 +13,6 @@ public class GUIMenu extends JFrame{
     private void frameAttributes(){
         getContentPane().setBackground(Color.decode("#3d4547"));
         repaint();
-
         ImageIcon image = new ImageIcon("Project Folder/data/Images/fxiconkitchen.png");
         Image img = image.getImage();
         setIconImage(img);
@@ -23,16 +22,8 @@ public class GUIMenu extends JFrame{
         setTitle("Kitchen Software");
         setSizeFrame();
         setLocationRelativeTo(null);
-        setBackground();
     }
-    private void setBackground(){
 
-//        bgImage = new ImageIcon("Project Folder/data/Images/background.jpg");
-//        background = new JLabel(addImages(bgImage,2,2));
-//        background.setLayout(new GridBagLayout());
-        //add(background,BorderLayout.CENTER);
-
-    }
     private void setSizeFrame(){
         Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize((int) screenSize.getSize().width-200, screenSize.getSize().height-200);

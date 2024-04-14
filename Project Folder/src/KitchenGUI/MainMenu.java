@@ -24,13 +24,15 @@ public class MainMenu extends GUIMenu {
     private ActionListener homeOption,ticketsOption,menuOption,stockOption,wasteOption,exitOption;
     private Font abrilFont;
     public MainMenu(String username){
+        orderMenu = new OrderMenu();
+        menuManagement = new MenuManagement();
+
         this.username=username;
         currentMenuOpen=0;
         addFont();
         //showMenu();
         migLay();
-        orderMenu = new OrderMenu();
-        menuManagement = new MenuManagement();
+
     }
     private void addFont(){
         try {
@@ -186,13 +188,19 @@ public class MainMenu extends GUIMenu {
                 orderMenu.setVisible(true);
                 break;
             case 3:
-                System.out.println("Show the Waste Management System");
+                System.out.println("Show the Menu Management System");
                 add(menuManagement,BorderLayout.CENTER);
                 revalidate();
                 repaint();
                 menuManagement.setVisible(true);
                 break;
             case 4:
+                System.out.println("Show the Stock Control System");
+                //add(stockControl,BorderLayout.CENTER);
+                // ADD YOUR INVENTORY MANAGEMENT HERE!
+                revalidate();
+                repaint();
+                //stockControl.setVisible(true);
                 break;
             case 5:
                 break;
@@ -217,7 +225,9 @@ public class MainMenu extends GUIMenu {
             case 3:
                 menuManagement.setVisible(false);
                 break;
-
+            case 4:
+                //stockControl.setVisible(false);
+                break;
 
 
         }
