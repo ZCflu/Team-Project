@@ -1,6 +1,6 @@
 package Management;
 
-import Kitchen.dish;
+import Kitchen.Dish;
 import Kitchen.Menu;
 import Kitchen.Order;
 
@@ -43,7 +43,7 @@ public interface MNGInterface {
      * @param dishID The ID of the dish.
      * @return The Kitchen.Dish object representing the dish details.
      */
-    public dish getDish(int dishID) throws SQLException;
+    public Dish getDish(int dishID) throws SQLException;
 
     /**
      * Retrieves order details by ID.

@@ -8,7 +8,7 @@ import java.awt.*;
 public class OrderTicket extends JPanel {
     private JLabel ticketNumber;
     private JLabel dishLabels;
-    private List<dish> dishes;
+    private List<Dish> dishes;
     private int tableNumber;
     private tableOrder order;
     public OrderTicket(tableOrder order){

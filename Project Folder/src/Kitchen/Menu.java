@@ -12,7 +12,7 @@ public class Menu {
     private boolean headChefApproval; // Indicates approval status by the head chef
     private boolean sousChefApproval; // Indicates approval status by the sous chef
     private boolean chefApproval; // Indicates overall approval status by the chef
-    private List<dish> dishes; // Array of Kitchen.Dish objects representing the dishes on the menu
+    private List<Dish> dishes; // Array of Kitchen.Dish objects representing the dishes on the menu
 
     /**
      * Constructor to initialize a Kitchen.Menu object with provided details.
@@ -21,7 +21,7 @@ public class Menu {
      * @param creationDate Date when the menu was created.
      * @param dishes Array of Kitchen.Dish objects representing the dishes on the menu.
      */
-    public Menu(int menuID, int creationDate, List<dish> dishes) {
+    public Menu(int menuID, int creationDate, List<Dish> dishes) {
         this.menuID = menuID;
         this.creationDate = creationDate;
         this.dishes = dishes;
@@ -50,7 +50,7 @@ public class Menu {
      *
      * @return Array of Kitchen.Dish objects representing the dishes on the menu.
      */
-    public List<dish> getDishes() {
+    public List<Dish> getDishes() {
         return this.dishes;
     }
 

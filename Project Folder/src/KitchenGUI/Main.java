@@ -20,9 +20,19 @@ public class Main {
         Menu m = mng.getMenu(1);
         System.out.println(m.getCreationDate());
         OrderUpdateListener listener = new OrderUpdater();
-        InventoryManagement im = new InventoryManagement();
-        im.getStock();
-        im.updateStock("Carrot", 100);
+        DishManagement add = new DishManagement();
+        Dish d1 = new Dish(2, "Chicken Korma", "Main Dish", 1020);
+        System.out.println(d1.getDishAvailability());
+        add.AddDish(d1);
+        add.updateDishType(d1.getDishID(), d1.getDishType());
+        add.updateDishRecipeID(d1.getDishID(), d1.getRecipeID());
+        add.updateDishAvailability(d1.getDishID(), 12);
+        d1.setDishAvailability(12);
+        d1.deductAvailability(5);
+        add.updateDishAvailability(d1.getDishID(), d1.getDishAvailability());
+        add.addDishID(1);
+
+
 
         //FOH foh = new FOH();
         //foh.notifyFohAboutOrders(listener);
@@ -38,7 +48,7 @@ public class Main {
         Menu testmen = test.getMenu(1);
         Menu testmen2 = test.getMenuByDate(20240410);
         List<Menu> testmen3 = test.getMenuRange(20240409,20340409);
-        dish dishTest = test.getDish(3);
+        Dish dishTest = test.getDish(3);
         Order orderTest = test.getOrder(2);
         Order orderTest2 = test.getOrderByDate(20240311);
         List<Order> orderTest3 = test.getOrderRange(20240311,21240350);
@@ -61,14 +71,14 @@ public class Main {
         for(Ingredient i : ingList2){
             System.out.println("Ingredient2: "+ i.getIngredientName());
         }
-        for (dish d : testmen.getDishes()){
+        for (Dish d : testmen.getDishes()){
             System.out.println("Dish1: "+d.getDishName());
         }
-        for (dish d : testmen2.getDishes()){
+        for (Dish d : testmen2.getDishes()){
             System.out.println("Dish2: "+d.getDishName());
         }
         for (Menu m : testmen3){
-            for (dish d : testmen2.getDishes()){
+            for (Dish d : testmen2.getDishes()){
                 System.out.println("Dish3: "+d.getDishName());
             }
         }

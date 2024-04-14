@@ -11,7 +11,7 @@ public class tableOrder {
     private int tableID; // Identifier for the table associated with the order
     private int orderID; // Unique identifier for the order
     private boolean sendTogether; // Indicates whether the dishes should be sent together
-    private List<dish> orders; // Array of Kitchen.Dish objects representing the dishes ordered at the table
+    private List<Dish> orders; // Array of Kitchen.Dish objects representing the dishes ordered at the table
 
     /**
      * Constructor to initialize a Kitchen.tableOrder object with provided table ID, order ID, sendTogether flag, and array of dishes.
@@ -21,7 +21,7 @@ public class tableOrder {
      * @param sendTogether Indicates whether the dishes should be sent together.
      * @param dishes Array of Kitchen.Dish objects representing the dishes ordered at the table.
      */
-    public tableOrder(int tableID, int orderID, boolean sendTogether, List<dish> dishes) {
+    public tableOrder(int tableID, int orderID, boolean sendTogether, List<Dish> dishes) {
         this.tableID = tableID;
         this.orderID = orderID;
         this.sendTogether = sendTogether;
@@ -60,7 +60,7 @@ public class tableOrder {
      *
      * @return Array of Kitchen.Dish objects representing the dishes ordered at the table.
      */
-    public List<dish> getOrders() {
+    public List<Dish> getOrders() {
         return this.orders;
     }
 }
