@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class MainMenu extends GUIMenu {
+    private StockControl stockControl;
     private String username;
     private JPanel menuPanel;
     private MigLayout mig;
@@ -24,6 +25,7 @@ public class MainMenu extends GUIMenu {
     private ActionListener homeOption,ticketsOption,menuOption,stockOption,wasteOption,exitOption;
     private Font abrilFont;
     public MainMenu(String username){
+        stockControl = new StockControl();
         orderMenu = new OrderMenu();
         menuManagement = new MenuManagement();
 
@@ -198,9 +200,10 @@ public class MainMenu extends GUIMenu {
                 System.out.println("Show the Stock Control System");
                 //add(stockControl,BorderLayout.CENTER);
                 // ADD YOUR INVENTORY MANAGEMENT HERE!
+                add(stockControl,BorderLayout.CENTER);
                 revalidate();
                 repaint();
-                //stockControl.setVisible(true);
+                stockControl.setVisible(true);
                 break;
             case 5:
                 break;
@@ -226,7 +229,7 @@ public class MainMenu extends GUIMenu {
                 menuManagement.setVisible(false);
                 break;
             case 4:
-                //stockControl.setVisible(false);
+                stockControl.setVisible(false);
                 break;
 
 
