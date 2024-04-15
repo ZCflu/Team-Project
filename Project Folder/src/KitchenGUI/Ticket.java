@@ -2,6 +2,7 @@ package KitchenGUI;
 
 
 import FOHtoKitchen.Order;
+import Kitchen.OrderManagement;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -32,8 +34,8 @@ public class Ticket extends JPanel {
         addAttributes();
     }
 
-    private void buttonsMake(){
-        String[] options = { "Not Started", "Preparing", "Cooking", "Serving", "Done" };
+    private void buttonsMake(int orderID){
+        String[] options = {"Preparing", "Done" };
         selectProgress = new JComboBox(options);
         JLabel select = new JLabel("Update Order: ");
         add(select,"wrap,newline 25");
@@ -42,8 +44,19 @@ public class Ticket extends JPanel {
         ActionListener progressListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                OrderManagement om = new OrderManagement();
                 String option = selectProgress.getSelectedItem().toString();
                 System.out.println(order.getOrderStatus());
+                if (option == "Done")
+                {
+                    System.out.println("yes");
+                    try {
+                        om.updateOrder(orderID);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                }
                 order.setOrderStatus(option);
             }
         };
@@ -93,7 +106,7 @@ public class Ticket extends JPanel {
         add(dishesHeaderLabel, "wrap");
         addDishes();
         addAdditionalInformation();
-        buttonsMake();
+        buttonsMake(orderID);
         timerSet();
     }
 

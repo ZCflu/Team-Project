@@ -17,10 +17,10 @@ public class Main {
         //tests1();
         //tests2();
         Authentication auth = new Authentication();
-        MNG mng = new MNG();
-        Menu m = mng.getMenu(1);
-        System.out.println(m.getCreationDate());
-        OrderUpdateListener listener = new OrderUpdater();
+        //MNG mng = new MNG();
+        //Menu m = mng.getMenu(1);
+        //System.out.println(m.getCreationDate());
+        //OrderUpdateListener listener = new OrderUpdater();
       /*  DishManagement add = new DishManagement();
         Dish d1 = new Dish(2, "Chicken Korma", "Main Dish", 1020);
         System.out.println(d1.getDishAvailability());
@@ -44,6 +44,7 @@ public class Main {
         r.startPolling();
         OrderManagement om = new OrderManagement();
         om.addOrder();
+        om.updateOrder(39);
 
 
 

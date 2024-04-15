@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Team-Project:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Team_Project_jar</output-path>
+    <root id="archive" name="Team-Project.jar">
+      <element id="module-output" name="Team-Project" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Project Folder/lib/mysql-connector-j-8.3.0.jar" path-in-jar="/" />
+      <element id="library" level="project" name="mysql-connector-j-8.3.0" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Project Folder/lib/miglayout-swing-11.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Project Folder/lib/miglayout-core-11.3.jar" path-in-jar="/" />
+      <element id="module-source" name="Team-Project" />
+      <element id="dir-copy" path="$PROJECT_DIR$/Project Folder/data" />
+      <element id="dir-copy" path="$PROJECT_DIR$/Project Folder/data/Fonts" />
+      <element id="dir-copy" path="$PROJECT_DIR$/Project Folder/data/Images" />
+    </root>
+  </artifact>
+</component>

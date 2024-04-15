@@ -198,8 +198,9 @@ public class MainMenu extends GUIMenu {
                 break;
             case 4:
                 System.out.println("Show the Stock Control System");
-                //add(stockControl,BorderLayout.CENTER);
+                add(stockControl,BorderLayout.CENTER);
                 // ADD YOUR INVENTORY MANAGEMENT HERE!
+                InventoryManagement im = new InventoryManagement();
                 add(stockControl,BorderLayout.CENTER);
                 revalidate();
                 repaint();

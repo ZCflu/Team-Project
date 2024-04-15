@@ -10,6 +10,8 @@ import java.util.List;
 
 import FoH_API.KitchenAPI;
 import FoH_API.Order;
+import KitchenGUI.OrderMenu;
+import KitchenGUI.Ticket;
 
 public class OrderManagement {
 
@@ -35,15 +37,18 @@ public class OrderManagement {
 
     public void addOrder() throws SQLException
     {
+
         startConnection();
 
         List<Order> l = kp.getOrders();
+
         String insertQuery = "INSERT IGNORE INTO Orders (ID) VALUES (?)";
-        String insertQuery2 = "INSERT IGNORE INTO TableOrders (TableID, OrderID) VALUES (?, ?)";
+        String insertQuery2 = "INSERT IGNORE INTO TableOrders (TableID, OrderID, ReadyToServe) VALUES (?, ?, 0)";
 
         try (PreparedStatement insertStmt = con.prepareStatement(insertQuery2))
         {
             for(Order order : l) {
+               // Ticket ticket = new Ticket(order.getOrderID(),order.getItems(), "Hi", order,new OrderMenu());
                 insertStmt.setInt(1, order.getTableNo());
                 insertStmt.setInt(2, order.getOrderID());
 
@@ -84,6 +89,25 @@ public class OrderManagement {
     } finally {
         closeConnection();
     }
+
+    }
+
+    public  void updateOrder(int orderID) throws SQLException
+    {
+        startConnection();
+        String insertQuery = "UPDATE TableOrders SET ReadyToServe = 1  WHERE OrderID = ?";
+
+        try (PreparedStatement insertStmt = con.prepareStatement(insertQuery))
+        {
+            insertStmt.setInt(1,orderID);
+            insertStmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.err.println("SQL Error while adding Order: " );
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
 
     }
 }
