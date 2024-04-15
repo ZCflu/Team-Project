@@ -6,6 +6,7 @@ import Management.MNG;
 import Management.MNGInterface;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class Main {
         Menu m = mng.getMenu(1);
         System.out.println(m.getCreationDate());
         OrderUpdateListener listener = new OrderUpdater();
-        DishManagement add = new DishManagement();
+      /*  DishManagement add = new DishManagement();
         Dish d1 = new Dish(2, "Chicken Korma", "Main Dish", 1020);
         System.out.println(d1.getDishAvailability());
         add.AddDish(d1);
@@ -30,7 +31,15 @@ public class Main {
         d1.setDishAvailability(12);
         d1.deductAvailability(5);
         add.updateDishAvailability(d1.getDishID(), d1.getDishAvailability());
-        add.addDishID(1);
+        add.addDishID(1);*/
+
+        RecipeManagement rp = new RecipeManagement();
+        List<Ingredient> l = new ArrayList<>();
+        l.add(new Ingredient(1, "carrot", 10));
+        Recipe r = new Recipe(2, "Fries", l);
+
+        rp.addRecipe(r);
+        rp.addIngredientsToRecipe(r.getRecipeID(), l);
 
 
 
