@@ -16,6 +16,7 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         //tests1();
         //tests2();
+
         //Authentication auth = new Authentication();
         //MNG mng = new MNG();
         //Menu m = mng.getMenu(1);
@@ -55,6 +56,10 @@ public class Main {
 
 
         MainMenu menu = new MainMenu("HELLO");
+
+        Authentication auth = new Authentication();
+        //MainMenu menu = new MainMenu("HELLO");
+
     }
 
 

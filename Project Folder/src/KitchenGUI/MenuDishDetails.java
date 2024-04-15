@@ -16,6 +16,7 @@ import java.util.List;
 public class MenuDishDetails extends JFrame {
     private int menuID;
     private JPanel jPanel;
+    private JScrollPane jScrollPane;
     private BorderLayout borderLayout;
     private MigLayout migLayout;
 
@@ -34,11 +35,13 @@ public class MenuDishDetails extends JFrame {
     }
 
     private void addPanel() {
-        add(jPanel);
+        //add(jPanel);
+        add(jScrollPane);
     }
 
     private void addLayout() {
         jPanel = new JPanel();
+        jScrollPane = new JScrollPane(jPanel);
         jPanel.setBackground(Color.decode("#2B3336"));
         migLayout = new MigLayout();
         borderLayout = new BorderLayout();
