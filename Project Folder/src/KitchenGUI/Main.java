@@ -33,13 +33,18 @@ public class Main {
         add.updateDishAvailability(d1.getDishID(), d1.getDishAvailability());
         add.addDishID(1);*/
 
-        RecipeManagement rp = new RecipeManagement();
+        /*RecipeManagement rp = new RecipeManagement();
         List<Ingredient> l = new ArrayList<>();
         l.add(new Ingredient(1, "carrot", 10));
         Recipe r = new Recipe(2, "Fries", l);
 
         rp.addRecipe(r);
-        rp.addIngredientsToRecipe(r.getRecipeID(), l);
+        rp.addIngredientsToRecipe(r.getRecipeID(), l);*/
+        OrderR r = new OrderR();
+        r.startPolling();
+        OrderManagement om = new OrderManagement();
+        om.addOrder();
+
 
 
 
