@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         //tests1();
         //tests2();
-        Authentication auth = new Authentication();
+        //Authentication auth = new Authentication();
         //MNG mng = new MNG();
         //Menu m = mng.getMenu(1);
         //System.out.println(m.getCreationDate());
@@ -54,7 +54,7 @@ public class Main {
         //foh.checkFOhOrderStatus(6, 11);
 
 
-        //MainMenu menu = new MainMenu("HELLO");
+        MainMenu menu = new MainMenu("HELLO");
     }
 
 
