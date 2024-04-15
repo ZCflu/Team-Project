@@ -20,7 +20,6 @@ public class Main {
         //tests1();
         //tests2();
         Authentication auth = new Authentication();
-
         //MainMenu menu = new MainMenu("HELLO");
     }
 

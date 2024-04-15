@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class MainMenu extends GUIMenu {
+    private JScrollPane jScrollPane;
     private StockControl stockControl;
     private String username;
     private JPanel menuPanel;
@@ -28,6 +29,7 @@ public class MainMenu extends GUIMenu {
         stockControl = new StockControl();
         orderMenu = new OrderMenu();
         menuManagement = new MenuManagement();
+
 
         this.username=username;
         currentMenuOpen=0;
@@ -51,6 +53,7 @@ public class MainMenu extends GUIMenu {
     private void migLay(){
         mig = new MigLayout();
         menuPanel = new JPanel();
+        jScrollPane = new JScrollPane(menuPanel);
         menuPanel.setLayout(mig);
         menuPanel.setOpaque(true);
         menuPanel.setBackground(Color.decode("#2B3336"));
@@ -61,7 +64,8 @@ public class MainMenu extends GUIMenu {
         ImageIcon logo = new ImageIcon("Project Folder/data/Images/lancasterlogo.jpeg");
         menuPanel.add(new JLabel(addImages(logo,4,4)),"wrap");
         migLayButtons();
-        add(menuPanel,BorderLayout.WEST);
+        add(jScrollPane,BorderLayout.WEST);
+        //add(menuPanel,BorderLayout.WEST);
         repaint();
         show();
     }
