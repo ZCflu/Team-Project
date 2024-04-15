@@ -11,7 +11,11 @@ import MenuClasses.Ingredient;
 
 import javax.swing.*;
 
-public class InventoryManagement{
+
+
+
+public class InventoryManagement {
+
 
     ManagementTeamAPI mng = new ManagementTeamAPI();
 
@@ -19,16 +23,18 @@ public class InventoryManagement{
 
     private Connection con;
     private databaseAdmin database;
+
     private void closeConnection() throws SQLException {
         database.endConnection(con);
     }
+
     private void startConnection() throws SQLException {
         database = new databaseAdmin();
         con = new databaseAdmin().returnConnection();
     }
 
 
-    public void getStock() throws SQLException{
+    public void getStock() throws SQLException {
         startConnection(); // Open database connection
 
         String insertQuery = "INSERT INTO Ingredient (Name, ID) VALUES (?, ?) ON DUPLICATE KEY UPDATE Name = VALUES(Name), ID = VALUES(ID)";
@@ -54,6 +60,7 @@ public class InventoryManagement{
 
         closeConnection(); // Close database connection
     }
+
     public void updateStock(String name, int available) throws SQLException {
         startConnection(); // Open database connection
 
@@ -79,6 +86,7 @@ public class InventoryManagement{
 
         closeConnection(); // Close database connection
     }
-
-
 }
+
+
+

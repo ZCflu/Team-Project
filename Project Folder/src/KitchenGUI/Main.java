@@ -1,15 +1,12 @@
 package KitchenGUI;
 
-import FOHtoKitchen.KitchenAPI;
 import FrontOfHouse.FOH;
-import Kitchen.Dish;
-import Kitchen.Ingredient;
-import Kitchen.Menu;
-import Kitchen.Order;
+import Kitchen.*;
 import Management.MNG;
 import Management.MNGInterface;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +17,41 @@ public class Main {
         //tests1();
         //tests2();
         Authentication auth = new Authentication();
+        MNG mng = new MNG();
+        Menu m = mng.getMenu(1);
+        System.out.println(m.getCreationDate());
+        OrderUpdateListener listener = new OrderUpdater();
+      /*  DishManagement add = new DishManagement();
+        Dish d1 = new Dish(2, "Chicken Korma", "Main Dish", 1020);
+        System.out.println(d1.getDishAvailability());
+        add.AddDish(d1);
+        add.updateDishType(d1.getDishID(), d1.getDishType());
+        add.updateDishRecipeID(d1.getDishID(), d1.getRecipeID());
+        add.updateDishAvailability(d1.getDishID(), 12);
+        d1.setDishAvailability(12);
+        d1.deductAvailability(5);
+        add.updateDishAvailability(d1.getDishID(), d1.getDishAvailability());
+        add.addDishID(1);*/
+
+        /*RecipeManagement rp = new RecipeManagement();
+        List<Ingredient> l = new ArrayList<>();
+        l.add(new Ingredient(1, "carrot", 10));
+        Recipe r = new Recipe(2, "Fries", l);
+
+        rp.addRecipe(r);
+        rp.addIngredientsToRecipe(r.getRecipeID(), l);*/
+        OrderR r = new OrderR();
+        r.startPolling();
+        OrderManagement om = new OrderManagement();
+        om.addOrder();
+
+
+
+
+        //FOH foh = new FOH();
+        //foh.notifyFohAboutOrders(listener);
+        //foh.checkFOhOrderStatus(6, 11);
+
 
         //MainMenu menu = new MainMenu("HELLO");
     }

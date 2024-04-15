@@ -4,7 +4,6 @@ import DatabaseConnection.databaseDataCon;
 import Kitchen.*;
 
 
-import java.lang.reflect.GenericDeclaration;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +74,7 @@ public class MNG implements MNGInterface {
 
                     }
                     Recipe recipe = new Recipe(recipeID, recipeName, ingredients);
-                    Dish dish = new Dish(dishID, dishName, recipe);
+                    Dish dish = new Dish(dishID, dishName,null, 0);
                     dishes.add(dish);
                 }
             }
@@ -140,7 +139,7 @@ public class MNG implements MNGInterface {
 
                     }
                     Recipe recipe = new Recipe(recipeID, recipeName, ingredients);
-                    Dish dish = new Dish(dishID, dishName, recipe);
+                    Dish dish = new Dish(dishID, dishName,null, 0 );
                     dishes.add(dish);
                 }
 
@@ -208,7 +207,7 @@ public class MNG implements MNGInterface {
 
                     }
                     Recipe recipe = new Recipe(recipeID, recipeName, ingredients);
-                    Dish dish = new Dish(dishID, dishName, recipe);
+                    Dish dish = new Dish(dishID, dishName,null, 0);
                     dishes.add(dish);
                 }
 
@@ -261,7 +260,7 @@ public class MNG implements MNGInterface {
 
         }
         closeConnection();
-        return new Dish(dishID, dishName,recipe);
+        return new Dish(dishID, dishName,null, 0);
     }
 
     @Override

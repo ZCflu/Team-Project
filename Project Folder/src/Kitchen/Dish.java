@@ -8,19 +8,22 @@ public class Dish {
     private int dishID; // Unique identifier for the dish
     private int dishAvailability_status_id; // Availability status of the dish
     private String dishName; // Name of the dish
-    private Recipe recipe; // Kitchen.Recipe object representing the ingredients and preparation instructions for the dish
+
+    private String dishType;
+    private int recipeID; // Kitchen.Recipe object representing the ingredients and preparation instructions for the dish
 
     /**
      * Constructor to initialize a Kitchen.Dish object with provided dish ID, name, and recipe.
      * 
      * @param dishID Unique identifier for the dish.
      * @param dishName Name of the dish.
-     * @param recipe Kitchen.Recipe object representing the ingredients and preparation instructions for the dish.
      */
-    public Dish(int dishID, String dishName, Recipe recipe) {
+    public Dish(int dishID, String dishName, String dishType, int recipieID) {
         this.dishID = dishID;
         this.dishName = dishName;
-        this.recipe = recipe;
+        this.dishType = dishType;
+        this.recipeID = recipieID;
+
     }
 
     /**
@@ -28,9 +31,13 @@ public class Dish {
      * 
      * @return Kitchen.Recipe object representing the ingredients and preparation instructions for the dish.
      */
-    public Recipe getRecipe() {
-        return this.recipe;
+
+
+    public String getDishType() {
+        return this.dishType;
     }
+
+    public int getRecipeID(){return this.recipeID;}
 
     /**
      * Getter method to retrieve the name of the dish.
@@ -67,4 +74,10 @@ public class Dish {
     public int getDishAvailability() {
         return this.dishAvailability_status_id;
     }
+
+    public void deductAvailability(int sub){
+
+        this.dishAvailability_status_id = this.dishAvailability_status_id - sub;
+    }
 }
+
