@@ -9,18 +9,42 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implemented class of the MNGInterface.
+ * @see MNGInterface
+ */
 public class MNG implements MNGInterface {
     private PreparedStatement menuState, dishState, dishState2, recipeState, ingState, ingState2;
     private Connection con;
     private databaseDataCon database;
+
+    /**
+     * Method to close the connection to the Kitchen database.
+     * @throws SQLException
+     */
     private void closeConnection() throws SQLException {
         database.endConnection(con);
             }
+
+    /**
+     * Method to start the connection to the Kitchen database.
+     * @throws SQLException
+     */
     private void startConnection() throws SQLException {
         database = new databaseDataCon();
         con = new databaseDataCon().returnConnection();
             }
 
+    /**
+     * Method that allows the Management team to get a menu from the Kitchen database by a specified Menu ID.
+     * Starts a connection to the database, selects the menu with the specific Menu ID.
+     * The method then starts the process of creating a Menu object, iterating through the database to collect the Dishes related to the menu, the Recipes related to the Dishes, and then the Ingredients related to the Recipe.
+     * This information is then compiled and created into a single Menu object.
+     * @param menuID The ID of the menu.
+     * @return A menu object.
+     * @see Menu,Ingredient,Recipe,Dish
+     * @throws SQLException
+     */
     @Override
     public Menu getMenu(int menuID) throws SQLException {
         startConnection();
@@ -83,7 +107,16 @@ public class MNG implements MNGInterface {
         closeConnection();
         return new Menu(ID, creationDate, dishes);
     }
-
+    /**
+     * Method that allows the Management team to get a menu from the Kitchen database by a specified approval date.
+     * Starts a connection to the database, selects the menu with the specified approval date.
+     * The method then starts the process of creating a Menu object, iterating through the database to collect the Dishes related to the menu, the Recipes related to the Dishes, and then the Ingredients related to the Recipe.
+     * This information is then compiled and created into a single Menu object.
+     * @param approvalDate The approval date of the menu.
+     * @return A menu object.
+     * @see Menu,Ingredient,Recipe,Dish
+     * @throws SQLException
+     */
     @Override
     public Menu getMenuByDate(int approvalDate) throws SQLException {
         startConnection();
@@ -149,7 +182,17 @@ public class MNG implements MNGInterface {
         closeConnection();
         return new Menu(ID, creationDate, dishes);
     }
-
+    /**
+     * Method that allows the Management team to get a list of menus from the Kitchen database by a range of approval dates.
+     * Starts a connection to the database, selects the menus inside the range of the initialDate and endDate.
+     * The method then starts the process of creating a Menu object, iterating through the database to collect the Dishes related to the menu, the Recipes related to the Dishes, and then the Ingredients related to the Recipe.
+     * For each Menu that is found, a new Menu object is created. These Menu objects are then compiled into a menuList that holds the various menu's that may have been found.
+     * @param initialDate The initial date of the range.
+     * @param endDate The end date of the range.
+     * @return A List of Menu objects.
+     * @see Menu,Ingredient,Recipe,Dish
+     * @throws SQLException
+     */
 
     @Override
     public List<Menu> getMenuRange(int initialDate, int endDate) throws SQLException {
@@ -219,7 +262,16 @@ public class MNG implements MNGInterface {
         closeConnection();
         return menuList;
     }
-
+    /**
+     * Method that allows the Management team to get dish from the Kitchen database by a Dish ID.
+     * Starts a connection to the database, selects the Dish with the specified Dish ID.
+     * The method then starts the process of creating a Dish object, iterating through to obtain the data related to the dish. Starting with retrieving the Recipe, then the Ingredients related to the Recipe.
+     * The specified Dish details (Recipe, Ingredients), are then compiled to create a Dish Object. 
+     * @param dishID The unique identifier of a Dish.
+     * @return A dish object.
+     * @see Ingredient,Recipe,Dish
+     * @throws SQLException
+     */
     @Override
     public Dish getDish(int dishID) throws SQLException {
         startConnection();
@@ -263,7 +315,16 @@ public class MNG implements MNGInterface {
         closeConnection();
         return new Dish(dishID, dishName,recipe);
     }
-
+    /**
+     * Method that allows the Management team to get an order from the Kitchen database by Order ID.
+     * Starts a connection to the database, selects the Order with the specified Order ID.
+     * The method then starts the process of creating a Order object, iterating through to obtain the data related to the Order. Starting with retrieving the OrdersIngredients to locate the Ingredient IDs related to the Order, then the Ingredients to retrieve the specific Ingredient data.
+     * The data retrieved is then compiled into a single Order object.
+     * @param orderID The unique identifier of a Dish.
+     * @return An Order object.
+     * @see Order,Ingredient
+     * @throws SQLException
+     */
     @Override
     public Order getOrder(int orderID) throws SQLException {
         startConnection();
@@ -300,6 +361,16 @@ public class MNG implements MNGInterface {
         return new Order(orderID,creationDate,ingredients);
     }
 
+    /**
+     * Method that allows the Management team to get an order from the Kitchen database by Date.
+     * Starts a connection to the database, selects the Order with the specified Order Date.
+     * The method then starts the process of creating a Order object, iterating through to obtain the data related to the Order. Starting with retrieving the OrdersIngredients to locate the Ingredient IDs related to the Order, then the Ingredients to retrieve the specific Ingredient data.
+     * The data retrieved is then compiled into a single Order object.
+     * @param orderDate The date when the order was created.
+     * @return An Order object
+     * @throws SQLException
+     * @see Order,Ingredient
+     */
     @Override
     public Order getOrderByDate(int orderDate) throws SQLException {
         startConnection();
@@ -334,6 +405,17 @@ public class MNG implements MNGInterface {
         return new Order(orderID,orderDate,ingredients);
     }
 
+    /**
+     * Method that allows the Management team to get a list of Orders from the Kitchen database by a range of approval dates.
+     * Starts a connection to the database, selects the Orders inside the range of the initialDate and endDate.
+     * The method then starts the process of creating a Order object, iterating through the database to collect the Ingredients related to the Orders.
+     * For each Order that is found, a new Order object is created. These Order objects are then compiled into a list of Orders which contains Orders along with the respective Ingredients for the specific Order.
+     * @param initialDate The initial date of the range.
+     * @param endDate The end date of the range.
+     * @return A List of Order objects
+     * @see Order,Ingredient
+     * @throws SQLException
+     */
     @Override
     public List<Order> getOrderRange(int initialDate, int endDate) throws SQLException {
         startConnection();

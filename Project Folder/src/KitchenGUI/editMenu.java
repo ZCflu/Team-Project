@@ -9,11 +9,19 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Extended JPanel class that allows the selection of viewing the attributes defined in the createMenu class. Extention is available to also allow the editing of a menu.
+ * @see createMenu
+ */
 public class editMenu extends JPanel {
     private Font abrilFont;
     private MigLayout migLayout;
     private int currentMenu;
     private createMenu creatingMenu;
+
+    /**
+     * Constructor that initialises the createMenu object. Executes the addFont(), initialLayout, and addButons() class.
+     */
     public editMenu(){
         creatingMenu = new createMenu();
         addFont();
@@ -22,7 +30,9 @@ public class editMenu extends JPanel {
     }
 
 
-
+    /**
+     * Method that adds the Lancaster's logo font to the class.
+     */
     private void addFont(){
         try {
             abrilFont = Font.createFont(Font.TRUETYPE_FONT, new File("Project Folder/data/Fonts/AbrilFatface-Regular.otf"));
@@ -34,12 +44,21 @@ public class editMenu extends JPanel {
         }
     }
 
+    /**
+     * Method that sets the layout to a MigLayout, sets the frame to being opaque, and changes the background colour.
+     * @see MigLayout
+     */
     private void initialLayout(){
         migLayout = new MigLayout("align center,alignx center");
         setLayout(migLayout);
         setOpaque(true);
         setBackground(Color.decode("#3d4547"));
     }
+
+    /**
+     * Creates and adds buttons to the JFrame. Button foreground colour, background colour, text, font, is selected here.
+     * Button action listeners are created here and added to the buttons.
+     */
     private void addButtons(){
         JButton button1 = new JButton("New Menu");
         JButton button2 = new JButton("Update Menus");

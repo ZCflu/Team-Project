@@ -11,6 +11,9 @@ import MenuClasses.Ingredient;
 
 import javax.swing.*;
 
+/**
+ * Class that updates Kitchen database with stock from the management team.
+ */
 public class InventoryManagement{
 
     ManagementTeamAPI mng = new ManagementTeamAPI();
@@ -19,15 +22,30 @@ public class InventoryManagement{
 
     private Connection con;
     private databaseAdmin database;
+
+    /**
+     * Method to close the connection to the database.
+     * @see databaseAdmin
+     * @throws SQLException
+     */
     private void closeConnection() throws SQLException {
         database.endConnection(con);
     }
+
+    /**
+     * Method that starts the connection to the database.
+     * @see databaseAdmin
+     * @throws SQLException
+     */
     private void startConnection() throws SQLException {
         database = new databaseAdmin();
         con = new databaseAdmin().returnConnection();
     }
 
-
+    /**
+     * Method to retrieve fresh stock from the Management team's database. A connection is established with the Kitchen database, and attempts to inset it into the Ingredient table.
+     * @throws SQLException
+     */
     public void getStock() throws SQLException{
         startConnection(); // Open database connection
 
@@ -54,6 +72,13 @@ public class InventoryManagement{
 
         closeConnection(); // Close database connection
     }
+
+    /**
+     * Method to update stock in the Kitchen Database. Starts a database connection and uses the provided parameters to select a specific ingredient by name and update the available quantity of the said ingredient.
+     * @param name Name of the ingredient.
+     * @param available Available number of the ingredient.
+     * @throws SQLException
+     */
     public void updateStock(String name, int available) throws SQLException {
         startConnection(); // Open database connection
 

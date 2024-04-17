@@ -18,6 +18,12 @@ public class Order {
     // Table number associated with the order
     private int tableNo;
 
+    /**
+     *
+     * @param orderID
+     * @param orderStatus
+     * @param tableNo
+     */
     public Order(int orderID, String orderStatus, int tableNo){
         this.orderID = orderID;
         this.orderStatus = orderStatus;

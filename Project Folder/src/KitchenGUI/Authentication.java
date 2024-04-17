@@ -6,12 +6,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/**
+ * Authentication class which produces a JFrame window, requiring the user to input a correct username and password.
+ */
 public class Authentication extends JFrame {
     private JPanel panel;
     private JButton loginButton;
@@ -19,6 +23,15 @@ public class Authentication extends JFrame {
     private scaleImage scaler;
     private GridBagConstraints gbc;
     private JLabel incorrect;
+    private ImageIcon loginB;
+    private ImageIcon loginHover;
+
+    /**
+     * Constructor for the authentication class.
+     * Initialises a new scaleImage object.
+     * Sets attributes of the frame.
+     * Adds a panel and shows it on the frame.
+     */
     public Authentication(){
         scaler = new scaleImage();
         setAttributes();
@@ -27,11 +40,21 @@ public class Authentication extends JFrame {
 
     }
 
+    /**
+     * Method that sets attributes of the JFrame.
+     */
     private void setAttributes(){
         setSize(800,800);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
+
+    /**
+     * Method that creates a new panel.
+     * Adds images, text, and text fields to the panel using GridBagConstraints.
+     * @see GridBagConstraints
+     *
+     **/
     private void addPanel(){
         panel = new JPanel();
         setResizable(false);
@@ -67,8 +90,7 @@ public class Authentication extends JFrame {
         panel.add(passField,gbc);
 
 
-        ImageIcon loginB = new ImageIcon("Project Folder/data/Images/LoginUI/button_login.png");
-        ImageIcon loginHover = new ImageIcon("Project Folder/data/Images/LoginUI/button_login_hover.png");
+        loadImages();
         loginButton = new JButton(loginB);
         loginButton.setPreferredSize(new Dimension(loginB.getIconWidth(),loginB.getIconHeight()));
         loginButton.setBorder(null);
@@ -83,8 +105,26 @@ public class Authentication extends JFrame {
         add(panel);
     }
 
+    /**
+     * Method that loads images from the project folder. Assigning the images to their respective objects.
+     */
+    private void loadImages() {
+        try {
+            // Load images from resources
+            URL imageURL1= getClass().getResource("/button_login.png");
+            URL imageURL2= getClass().getResource("/data/Images/LoginUI/button_login_hover.png");
 
+            loginB = new ImageIcon(imageURL1);
+            loginHover = new ImageIcon(imageURL2);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle the exception accordingly, e.g., show an error message
+        }
+    }
 
+    /**
+     * Action listener that executes the checkCredentials() method.
+     */
     ActionListener actionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -95,7 +135,12 @@ public class Authentication extends JFrame {
             }
         }
     };
-
+    /**
+     * Method that checks the credentials on the database.
+     * If credentials are incorrect, the user is notified.
+     * If credentials are correct, the JFrame is disposed and the main menu appears.
+     * @see JFrame,MainMenu,databaseDataCon
+     */
     private void checkCredentials() throws SQLException {
             databaseDataCon database = new databaseDataCon();
             Connection con = database.returnConnection();
@@ -128,6 +173,11 @@ public class Authentication extends JFrame {
 
     }
 
+    /**
+     * Method to create a new JLabel to tell the user if the input Username and Password is incorrect.
+     * @see JLabel
+     */
+
     private void incorrectDetails(){
         incorrect = new JLabel("                                          ");
         incorrect.setForeground(Color.red);
@@ -135,7 +185,6 @@ public class Authentication extends JFrame {
         gbc.gridy=8; // Place it at the bottom
         gbc.gridwidth = 2; // Span over two columns
         gbc.anchor = GridBagConstraints.CENTER; // Center horizontally
-
         panel.add(incorrect,gbc);
     }
 

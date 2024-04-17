@@ -10,6 +10,11 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class that extends GUIMenu. Adds the left selection menu on the JFrame, allowing the user to select between different areas of the software.
+ * @see GUIMenu
+ */
+
 public class MainMenu extends GUIMenu {
     private JScrollPane jScrollPane;
     private StockControl stockControl;
@@ -25,6 +30,11 @@ public class MainMenu extends GUIMenu {
     private JButton button1,button2,button3,button4;
     private ActionListener homeOption,ticketsOption,menuOption,stockOption,wasteOption,exitOption;
     private Font abrilFont;
+
+    /**
+     * Constructor for the class. Initialises new stockControl(), orderMenu, and menuManagement objects. Executes the addFont() and migLay methods.
+     * @param username Used to show the name of the user on screen.
+     */
     public MainMenu(String username){
         stockControl = new StockControl();
         orderMenu = new OrderMenu();
@@ -38,6 +48,10 @@ public class MainMenu extends GUIMenu {
         migLay();
 
     }
+
+    /**
+     * Method to add the Lancaster's logo font to the class.
+     */
     private void addFont(){
         try {
             abrilFont = Font.createFont(Font.TRUETYPE_FONT, new File("Project Folder/data/Fonts/AbrilFatface-Regular.otf"));
@@ -50,6 +64,12 @@ public class MainMenu extends GUIMenu {
 
 
     }
+
+    /**
+     * Method to a new JScrollPane, a JPanel and initialise a new MigLayout. The JScrollPane is added to the class' JFrame. The JPanel is added to the JScrollPane. Welcoming label, the Lancaster's logo, and buttons are added to the JPanel.
+     * Executes the migLayButtons() method.
+     * @see MigLayout
+     */
     private void migLay(){
         mig = new MigLayout();
         menuPanel = new JPanel();
@@ -69,6 +89,13 @@ public class MainMenu extends GUIMenu {
         repaint();
         show();
     }
+
+    /**
+     * Method to create the buttons and set the attributes of the buttons. The text, foregound colour, background colour, setFocusPainted and font is added.
+     * Executed the mouseListener method, putting in the buttons created as parameters.
+     * Sets the size of the buttons.
+     * Adds the buttons to the JPanel.
+     */
     private void migLayButtons(){
         JButton HomeButton = new JButton("Home");
         JButton TicketsButton = new JButton("Tickets");
@@ -119,6 +146,16 @@ public class MainMenu extends GUIMenu {
         menuPanel.add(ExitButton,"wrap 2,grow,newline 50,pushy 50");
 
     }
+
+    /**
+     * Method that creats ActionListeners for each of the buttons on the menu. Each listener executes the removeCurrentMenu() method and changeMenu() method. It then sets the currentMenuOpen to the respective value. Adds ActionListeners to the buttons.
+     * @param homeButton JButton created from migLayButtons() method.
+     * @param ticketsButton JButton created from migLayButtons() method.
+     * @param menuManagement JButton created from migLayButtons() method.
+     * @param stockButton JButton created from migLayButtons() method.
+     * @param wasteButton JButton created from migLayButtons() method.
+     * @param exitButton JButton created from migLayButtons() method.
+     */
 
     private void mouseListener(JButton homeButton,JButton ticketsButton,JButton menuManagement,JButton stockButton,JButton wasteButton,JButton exitButton){
         homeOption = new ActionListener() {
@@ -179,6 +216,11 @@ public class MainMenu extends GUIMenu {
         exitButton.addActionListener(exitOption);
     }
 
+    /**
+     * Method that changes the current menu on the JFrame. Contains a switch case adding the selected menu to the frame, taking in the menuID from the mouseListener() function.
+     * @param menuID Menu identifier.
+     */
+
     private void changeMenu(int menuID){
         switch (menuID){
             case 1:
@@ -217,6 +259,10 @@ public class MainMenu extends GUIMenu {
 
         }
     }
+
+    /**
+     * Method to remove the current menu shown on the JFrame. Setting the visibility to false if a different menu is selected.
+     */
 
     private void removeCurrentMenu(){
         System.out.println(currentMenuOpen);

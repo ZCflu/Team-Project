@@ -13,6 +13,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that displays the dishes of the selected menu. A new JFrame is opened with the details of the Dish IDs, Dish Names, Dish Types, Dish RecipeIDs and Availability of the dish.
+ */
 public class MenuDishDetails extends JFrame {
     private int menuID;
     private JPanel jPanel;
@@ -20,6 +23,10 @@ public class MenuDishDetails extends JFrame {
     private BorderLayout borderLayout;
     private MigLayout migLayout;
 
+    /**
+     * Constructor that executes the setAttributes(), addLayout(),addHeader(),addPanel() methods.
+     * @param MenuID Used in the SQL in getDishes() to generate the dishes in the selected menu.
+     */
     public MenuDishDetails(int MenuID) {
         this.menuID = MenuID;
         setAttributes();
@@ -28,17 +35,27 @@ public class MenuDishDetails extends JFrame {
         addPanel();
     }
 
+    /**
+     * Method to set the attributes of the JFrame. The size is set to a standard size of 500 in width and height. The relative location of the frame is then set to null so it appears in the middle of the screen.
+     */
     private void setAttributes() {
         setSize(500, 500);
         setLocationRelativeTo(null);
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Added to ensure the window closes properly
     }
 
+    /**
+     * Method to add a JScrollPane to the Frame. Allowing scrolling if there is overflow of the dishes.
+     */
     private void addPanel() {
         //add(jPanel);
         add(jScrollPane);
     }
 
+    /**
+     * Method to create the JPanel, JScrollPane. Sets the JPanel layout to the MigLayout and the Frame layout to a BorderLayout.
+     * @see MigLayout
+     */
     private void addLayout() {
         jPanel = new JPanel();
         jScrollPane = new JScrollPane(jPanel);
@@ -49,6 +66,10 @@ public class MenuDishDetails extends JFrame {
         setLayout(borderLayout);
     }
 
+    /**
+     * Method to adds details before dishes are printed onto the JPanel. A label is created that outlines the dishes are about to follow. The foreground colour is selected.
+     * The getDishes() method is then called to generate the dishes.
+     */
     private void addHeader() {
         JLabel dishLabel = new JLabel("Dishes: ");
         dishLabel.setForeground(Color.white);
@@ -58,6 +79,10 @@ public class MenuDishDetails extends JFrame {
         jPanel.revalidate();
     }
 
+    /**
+     * Method to retrieve the dishes that the menu contains from the Kitchen database. Starts a connection to the Kitchen database using the databaseAdmin class.
+     * The details of each dish is added to a respective JLabel, then added to the JPanel.
+     */
     private void getDishes(){
             String dishName=null;
             String dishType=null;

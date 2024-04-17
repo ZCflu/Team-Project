@@ -16,6 +16,9 @@ import java.util.*;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * A JPanel that allows creation of a new Menu that is sent to the database.
+ */
 public class createMenu extends JPanel {
     private Map<String,Integer> dishesMap;
     private HashSet<Integer> dishIDs;
@@ -27,6 +30,13 @@ public class createMenu extends JPanel {
     private JLabel selectedDishes;
     private JComboBox<String> comboBox;
     private int column;
+
+    /**
+     * Constructor for the createMenu class that initialises the addedLabels list, dishIds set, and dishesMap.
+     * Adds a new font. AbrilFont - similar font to the Lancaster's Logo.
+     * Initialises the layout of the JPanel.
+     * Creates the labels for the JPanel.
+     */
     public createMenu(){
         column=0;
         addedLabels = new ArrayList<>();
@@ -38,8 +48,9 @@ public class createMenu extends JPanel {
     }
 
 
-
-
+    /**
+     * Method to add the Abril Font to the class so it can be used in JLabels.
+     */
     private void addFont(){
         try {
             abrilFont = Font.createFont(Font.TRUETYPE_FONT, new File("Project Folder/data/Fonts/AbrilFatface-Regular.otf"));
@@ -51,6 +62,11 @@ public class createMenu extends JPanel {
         }
     }
 
+    /**
+     * Method to initialise the layout of the JPanel.
+     * Uses an external library, MigLayout.
+     * @see MigLayout
+     */
     private void initialLayout(){
         migLayout = new MigLayout("align center,alignx center");
         setLayout(migLayout);
@@ -59,6 +75,9 @@ public class createMenu extends JPanel {
         setBackground(Color.white);
     }
 
+    /**
+     * Method to create the labels and buttons that are added to the JPanel
+     */
     private void labels(){
         JLabel creatingMenu = new JLabel("Creating Menu");
         add(creatingMenu,"wrap");
@@ -67,6 +86,10 @@ public class createMenu extends JPanel {
         createButtonListener();
     }
 
+    /**
+     * Method that adds a JComboBox to the JPanel. It contains all the dishes stored in the database.
+     * @param bool
+     */
     private void addDropdown(boolean bool){
         List<String> options = new ArrayList<>();
         try {
@@ -97,6 +120,10 @@ public class createMenu extends JPanel {
 
     }
 
+    /**
+     * Method to add buttons that add dishes and creates a menu.
+     */
+
     private void addButtons(){
         addDishButton = new JButton("Add Dish");
         createMenuButton = new JButton("Create Menu");
@@ -106,10 +133,21 @@ public class createMenu extends JPanel {
         listDishesLabel();
 
     }
+
+    /**
+     * Method that adds JLabel to show where the selected dishes start.
+     */
     private void listDishesLabel(){
         JLabel selectedDishes = new JLabel("Selected Dishes: ");
         add(selectedDishes,"wrap");
     }
+
+    /**
+     * Method to add a new dish.
+     * Dish is displayed on the JPanel.
+     * There are 5 columns of dishes before a new line is created.
+     * @param dishName
+     */
 
     private void addNewDish(String dishName){
         JLabel dish = new JLabel(dishName);
@@ -126,6 +164,12 @@ public class createMenu extends JPanel {
         repaint();
         revalidate();
     }
+    /**
+     * Method that creates listeners for the buttons.
+     * addDishListen executes the addNewDish method.
+     * createMenuListen executes the submitMenu method.
+     * removeDishListen executes the removeDishMethod (Not implemented).
+     */
     private void createButtonListener(){
         ActionListener addDishListen = new ActionListener() {
             @Override
@@ -153,6 +197,15 @@ public class createMenu extends JPanel {
 
 
     }
+
+    /**
+     * Method that submits a compiled menu to the database.
+     * Creation date is initialised to current date.
+     * New database connection is created.
+     * A new menu is inserted in the database.
+     * Dishes selected for the menu is inserted into the MenuDish table in the database.
+     * Selected Dish lables are cleared from the screen, allowing selection of a new dish.
+     */
 
     private void submitMenu() {
         int generatedID=0;

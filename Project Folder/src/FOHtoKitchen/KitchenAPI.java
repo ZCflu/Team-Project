@@ -5,9 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * API from the front of house. Allows connection to their database to retrieve data on Orders.
+ */
+
 public class KitchenAPI implements kitchenInterface{
 
-    // implemented
+    /**
+     * Getter for a list of orders that are currently pending in the database.
+     * @return A list of Orders objects that represent current orders.
+     */
     @Override
     public List<Order> getOrders() {
         List<Order> orders = new ArrayList<>();
@@ -54,6 +61,12 @@ public class KitchenAPI implements kitchenInterface{
         return orders;
     }
 
+    /**
+     * Creates a connection to the Front of House database.
+     * @return A connection object.
+     * @throws SQLException
+     */
+
     private Connection getConnection() throws SQLException {
         // Database credentials
         String url = "jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t16";
@@ -64,7 +77,11 @@ public class KitchenAPI implements kitchenInterface{
         return DriverManager.getConnection(url, user, password);
     }
 
-    // not implemented
+    /**
+     * Updates the status of an Order on the database.
+     * (Not implemented).
+     * @return Currently returns null. When implemented, returns an Order object.
+     */
     @Override
     public Order updateBookingStatus() {
         return null;

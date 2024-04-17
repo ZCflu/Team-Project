@@ -16,6 +16,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for viewing stock control information. Contains data from the Kitchen database. Allowing you to search for a specific ingredient by name or ID, as well as updating the stock in the Kitchen database.
+ */
 public class StockControl extends JPanel {
     private PreparedStatement searchState;
     private  InventoryManagement inventoryManagement;
@@ -34,6 +37,9 @@ public class StockControl extends JPanel {
     private List<JLabel> currentLabels;
     private JTextField setAmountField;
 
+    /**
+     * Constructor that initializes a new array list (currentLabels) that keeps track of the current ingredients shown on screen. Executes the addFont(), initialLayout(),addButtons(),addSearched(),scrollPane(),addButtonListeners() methods.
+     */
     public StockControl(){
 
         currentLabels = new ArrayList<>();
@@ -48,6 +54,9 @@ public class StockControl extends JPanel {
 
     }
 
+    /**
+     * Method that allows searching for a specific ingredient by name or by ID. Connects to the Kitchen database, and uses the data input in the JTextField objects ingNameField and inputID. Removes the labels labels that contain other ingredients before showing the searched ingredient.
+     */
     private void search(){
         searchState=null;
         for (JLabel s : currentLabels){
@@ -91,7 +100,11 @@ public class StockControl extends JPanel {
     }
 
 
-
+    /**
+     * Method to add ActionListeners to the updateButton and searchButton.
+     * The updateButton will execute the update() function.
+     * The searchButton will execute the search() function.
+     */
     private void addButtonListener(){
         ActionListener buttonListen = new ActionListener() {
             @Override
@@ -110,6 +123,10 @@ public class StockControl extends JPanel {
         searchButton.addActionListener(buttonListen);
     }
 
+    /**
+     * Method to update the amount of stock for the input ingredient ID. Uses a connection to the database to execute an update query on the AvailableQuantity in the Ingredient table where the ID is the number input in the inputID JTextField.
+     * Executes the scrollPaneContents method with a true parameter.
+     */
     private void update(){
         int amount = Integer.parseInt(setAmountField.getText());
         int ID = Integer.parseInt(inputID.getText());
@@ -132,7 +149,9 @@ public class StockControl extends JPanel {
         }
 
 
-
+/**
+ * Method to add the search fields, allowing the user to search for an ingredient by the name or it's ID.
+ */
     }
 
     private void addSearches(){
@@ -162,9 +181,12 @@ public class StockControl extends JPanel {
         add(ingNameField);
         add(ingIDField);
         add(searchButton,"wrap");
-
-
     }
+
+    /**
+     * Method that initialises a new JScrollPane and JPanel, allowing overflow of the ingredients to be handled. A new MigLayout is created, and set as the layout for the JPanel. The JScrollPane is then added to the JPanel.
+     * scrollPaneContents is then executed with a false parameter.
+     */
     private void scrollPane(){
         scrollInto = new JPanel();
         mig2 = new MigLayout();
@@ -176,6 +198,14 @@ public class StockControl extends JPanel {
 
     }
 
+    /**
+     * Method to retrieve the ingredients from the Kitchen database and present them on the JPanel.
+     * If called from the scrollPane() function, the labels outlining the different details of the ingredient are created. A database connection is then made to retrieve the full list of ingredients in the Kitchen's database. For each ingredient, the addIngredientsToPane method is called.
+     * If called from the update() function, a new database connection is made to retrieve the updated list of ingredients in the Kitchen's database. For each ingredient, the addIngredientsToPane method is called.
+     *
+     * @see databaseAdmin
+     * @param bool To check whether the call of the method is coming from the method scrollPane() or search().
+     */
     private void scrollPaneContents(Boolean bool){
         databaseAdmin database = null;
         int ID;
@@ -211,6 +241,15 @@ public class StockControl extends JPanel {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Method to add ingredients found from the search() method or scrollPaneContents() method. Creates labels for each attribute of the ingredient (ID,Name,Quantity, and Waste) and adds the labels to the scrollInto pane.
+     * Contains a check to see whether the quantity of the ingredient is below a certain threshhold (default: 20), if true, the colour of the quantity text is set to (default: red).
+     * @param ID Unique identifier of the ingredient.
+     * @param Name Name of the ingredient.
+     * @param Quantity Quantity of the ingredient.
+     * @param Waste Amount of waste for the ingredient.
+     */
     private void addIngredientsToPane(String ID,String Name,int Quantity,int Waste){
         JLabel ingredientID = new JLabel(String.valueOf(ID));
         JLabel ingredientName = new JLabel(Name);
@@ -232,7 +271,9 @@ public class StockControl extends JPanel {
         revalidate();
     }
 
-
+    /**
+     * Method to add the Lancaster's logo font to the class so it can be used in the buttons.
+     */
     private void addFont(){
         try {
             abrilFont = Font.createFont(Font.TRUETYPE_FONT, new File("Project Folder/data/Fonts/AbrilFatface-Regular.otf"));
@@ -244,12 +285,20 @@ public class StockControl extends JPanel {
         }
     }
 
+    /**
+     * Method to set the layout of the StockControl panel. Background colour, opaque boolean is set.
+     * @see MigLayout
+     */
     private void initialLayout(){
         migLayout = new MigLayout("align center,alignx center");
         setLayout(migLayout);
         setOpaque(true);
         setBackground(Color.decode("#3d4547"));
     }
+
+    /**
+     * Method to add the of "Stock Control" at the top of the screen. Attributes of the label are set, including: Foreground and background colour, and Font.
+     */
     private void addButtons(){
         JLabel StockControlLabel = new JLabel("Stock Control");
 
