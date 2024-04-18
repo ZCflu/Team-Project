@@ -17,6 +17,7 @@ public interface MNGInterface {
      * 
      * @param menuID The ID of the menu.
      * @return The Kitchen.Menu object representing the menu details.
+     * @throws SQLException
      */
     public Menu getMenu(int menuID) throws SQLException;
 
@@ -25,6 +26,7 @@ public interface MNGInterface {
      * 
      * @param approvalDate The date when the menu was approved.
      * @return The Kitchen.Menu object representing the menu details.
+     * @throws SQLException
      */
     public Menu getMenuByDate(int approvalDate) throws SQLException;
 
@@ -34,6 +36,7 @@ public interface MNGInterface {
      * @param initialDate The initial date of the range.
      * @param endDate The end date of the range.
      * @return A list of Kitchen.Menu objects representing the menus approved within the specified date range.
+     * @throws SQLException
      */
     public List<Menu> getMenuRange(int initialDate, int endDate) throws SQLException;
 
@@ -42,6 +45,7 @@ public interface MNGInterface {
      * 
      * @param dishID The ID of the dish.
      * @return The Kitchen.Dish object representing the dish details.
+     * @throws SQLException
      */
     public Dish getDish(int dishID) throws SQLException;
 
@@ -50,6 +54,7 @@ public interface MNGInterface {
      * 
      * @param orderID The ID of the order.
      * @return The Kitchen.Order object representing the order details.
+     * @throws SQLException
      */
     public Order getOrder(int orderID) throws SQLException;
 
@@ -58,6 +63,7 @@ public interface MNGInterface {
      * 
      * @param orderDate The date when the order was created.
      * @return The Kitchen.Order object representing the order details.
+     * @throws SQLException
      */
     public Order getOrderByDate(int orderDate) throws SQLException;
 
@@ -67,6 +73,7 @@ public interface MNGInterface {
      * @param initialDate The initial date of the range.
      * @param endDate The end date of the range.
      * @return A list of Kitchen.Order objects representing the orders created within the specified date range.
+     * @throws SQLException
      */
     public List<Order> getOrderRange(int initialDate, int endDate) throws SQLException;
 }

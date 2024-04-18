@@ -1,7 +1,6 @@
 package KitchenGUI;
 
 import DatabaseConnection.databaseAdmin;
-import Kitchen.Dish;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -10,8 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class that displays the dishes of the selected menu. A new JFrame is opened with the details of the Dish IDs, Dish Names, Dish Types, Dish RecipeIDs and Availability of the dish.

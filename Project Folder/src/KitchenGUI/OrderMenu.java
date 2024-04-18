@@ -73,7 +73,8 @@ public class OrderMenu extends JPanel {
     /**
      * Method that initialises the API recieved from the Front of House. Created a new List of orders. For each order the dishes are added to an array list. Once all dishes are added to the list, a new ticket is created and the addTicket() method is called.
      * If an Order is already present on screen, it will not be refreshed, allowing the timer to be consistent.
-     * @see KitchenAPI,Order
+     * @see KitchenAPI
+     * @see Order
      */
     public void showOrders(){
         KitchenAPI kitchApi = new KitchenAPI();

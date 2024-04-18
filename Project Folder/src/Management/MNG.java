@@ -42,7 +42,10 @@ public class MNG implements MNGInterface {
      * This information is then compiled and created into a single Menu object.
      * @param menuID The ID of the menu.
      * @return A menu object.
-     * @see Menu,Ingredient,Recipe,Dish
+     * @see Menu
+     * @see Ingredient
+     * @see Recipe
+     * @see Dish
      * @throws SQLException
      */
     @Override
@@ -114,7 +117,10 @@ public class MNG implements MNGInterface {
      * This information is then compiled and created into a single Menu object.
      * @param approvalDate The approval date of the menu.
      * @return A menu object.
-     * @see Menu,Ingredient,Recipe,Dish
+     * @see Menu
+     * @see Ingredient
+     * @see Recipe
+     * @see Dish
      * @throws SQLException
      */
     @Override
@@ -190,7 +196,10 @@ public class MNG implements MNGInterface {
      * @param initialDate The initial date of the range.
      * @param endDate The end date of the range.
      * @return A List of Menu objects.
-     * @see Menu,Ingredient,Recipe,Dish
+     * @see Menu
+     * @see Ingredient
+     * @see Recipe
+     * @see Dish
      * @throws SQLException
      */
 
@@ -269,7 +278,9 @@ public class MNG implements MNGInterface {
      * The specified Dish details (Recipe, Ingredients), are then compiled to create a Dish Object. 
      * @param dishID The unique identifier of a Dish.
      * @return A dish object.
-     * @see Ingredient,Recipe,Dish
+     * @see Ingredient
+     * @see Recipe
+     * @see Dish
      * @throws SQLException
      */
     @Override
@@ -322,7 +333,8 @@ public class MNG implements MNGInterface {
      * The data retrieved is then compiled into a single Order object.
      * @param orderID The unique identifier of a Dish.
      * @return An Order object.
-     * @see Order,Ingredient
+     * @see Order
+     * @see Ingredient
      * @throws SQLException
      */
     @Override
@@ -369,7 +381,8 @@ public class MNG implements MNGInterface {
      * @param orderDate The date when the order was created.
      * @return An Order object
      * @throws SQLException
-     * @see Order,Ingredient
+     * @see Order
+     * @see Ingredient
      */
     @Override
     public Order getOrderByDate(int orderDate) throws SQLException {
@@ -413,7 +426,8 @@ public class MNG implements MNGInterface {
      * @param initialDate The initial date of the range.
      * @param endDate The end date of the range.
      * @return A List of Order objects
-     * @see Order,Ingredient
+     * @see Order
+     * @see Ingredient
      * @throws SQLException
      */
     @Override

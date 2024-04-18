@@ -11,7 +11,8 @@ public class DatabaseMNG {
      * Closes the connection to the database.
      * @param con Takes a connection that is initialised in databaseAdmin.java or databaseDataCon.java
      * @throws SQLException
-     * @see databaseAdmin,databaseDataCon
+     * @see databaseAdmin
+     * @see databaseDataCon
      */
     public void endConnection(Connection con) throws SQLException {
         con.close();

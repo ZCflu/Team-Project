@@ -8,7 +8,9 @@ import java.sql.SQLException;
 
 /**
  * Depreciated Class. Not used/Functional.
- * @see KitchenGUI.Ticket,KitchenGUI.OrderMenu
+ * @see KitchenGUI.Ticket
+ * @deprecated
+ * @see KitchenGUI.OrderMenu
  */
 public class KitchenManagement {
         private Connection con;

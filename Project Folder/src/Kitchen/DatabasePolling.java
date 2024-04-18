@@ -1,7 +1,6 @@
 package Kitchen;
 
 import java.sql.*;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,7 +19,8 @@ public class DatabasePolling {
     /**
      * Constructor that takes initialises the OrderUpdateListener.
      * @param listener OrderUpdateListener Object.
-     * @see OrderUpdater,OrderUpdateListener
+     * @see OrderUpdater
+     * @see OrderUpdateListener
      */
     public DatabasePolling(OrderUpdateListener listener) {
         this.listener = listener;

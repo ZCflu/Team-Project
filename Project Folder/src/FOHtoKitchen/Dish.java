@@ -7,7 +7,10 @@ public class Dish {
 
     /**
      * Front of House Dish class constructor. Takes in the name, quantity and price of the dish.
-     * @see KitchenAPI,kitchenInterface,Order,KitchenGUI.Ticket
+     * @see KitchenAPI
+     * @see kitchenInterface
+     * @see Order
+     * @see KitchenGUI.Ticket
      * @param name
      * @param quantity
      * @param price

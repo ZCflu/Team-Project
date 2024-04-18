@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * Interface the kitchen provided to the Front of House.
- * @see FOHInterface
+ * @see FrontOfHouse.FOHInterface
  */
 
 public class FOH implements FOHInterface{

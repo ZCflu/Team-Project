@@ -1,5 +1,7 @@
 package Kitchen;
 
+import Kitchen.OrderUpdater;
+
 /**
  * Interface for updating an order.
  * @see OrderUpdater

@@ -12,7 +12,8 @@ public class databaseDataCon extends DatabaseMNG {
     /**
      * Constructor that initialises password and username string to the data user database details.
      * @throws SQLException
-     * @see databaseAdmin,DatabaseMNG;
+     * @see databaseAdmin
+     * @see DatabaseMNG
      */
     public databaseDataCon() throws SQLException {
         url = "jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t17";
@@ -29,5 +30,8 @@ public class databaseDataCon extends DatabaseMNG {
         con = DriverManager.getConnection(url,dataUser,dataPassword);
         return con;
 
+    }
+
+    public void endConnection(Connection con) {
     }
 }

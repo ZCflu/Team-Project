@@ -1,7 +1,6 @@
 package FrontOfHouse;
 
 import Kitchen.OrderUpdateListener;
-
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -15,7 +14,7 @@ public interface FOHInterface {
      *
      * @return A map containing Item IDs as keys and availability status IDs as values.
      */
-    public Map<String, Integer> getDishAvailabilityUpdates() throws SQLException;
+    Map<String, Integer> getDishAvailabilityUpdates() throws SQLException;
 
     /**
      * Method to send and confirm special requests.
@@ -23,7 +22,7 @@ public interface FOHInterface {
      * @param specialRequests A map containing special request details (e.g., request ID, request description).
      * @return A map containing special request IDs as keys and confirmation status (true if kitchen can fulfill, false otherwise) as values.
      */
-    public Map<String, Boolean> confirmSpecialRequests(Map<String, String> specialRequests) throws SQLException;
+    Map<String, Boolean> confirmSpecialRequests(Map<String, String> specialRequests) throws SQLException;
 
     /**
      * Method to check status of an order.
@@ -32,12 +31,15 @@ public interface FOHInterface {
      * @param tableID ID of the table.
      * @return A boolean indicating the outcome.
      */
-    public boolean checkFOhOrderStatus(int orderID, int tableID) throws SQLException;
+    boolean checkFOhOrderStatus(int orderID, int tableID) throws SQLException;
+
 
     /**
      * Method to get notification if an order is ready.
-     * I have provided listners class aswell
+     *      * I have provided listeners class as well
+     * @param listener An OrderUpdateListener
+     * @see Kitchen.OrderUpdateListener,Kitchen.OrderUpdater
      */
-    public void notifyFohAboutOrders(OrderUpdateListener listener);
+    void notifyFohAboutOrders(OrderUpdateListener listener);
 
 }
