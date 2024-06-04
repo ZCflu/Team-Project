@@ -61,7 +61,7 @@ public class MainMenu extends GUIMenu {
         JLabel userName = new JLabel("Welcome "+username);
         menuPanel.add(userName,"wrap");
 
-        ImageIcon logo = new ImageIcon("Project Folder/data/Images/lancasterlogo.jpeg");
+        ImageIcon logo = new ImageIcon("Project Folder/src/main/resources/lancasterlogo.jpeg");
         menuPanel.add(new JLabel(addImages(logo,4,4)),"wrap");
         migLayButtons();
         add(jScrollPane,BorderLayout.WEST);

@@ -55,7 +55,7 @@ public class Main {
         //foh.checkFOhOrderStatus(6, 11);
 
 
-        MainMenu menu = new MainMenu("HELLO");
+        //MainMenu menu = new MainMenu("HELLO");
 
         Authentication auth = new Authentication();
         //MainMenu menu = new MainMenu("HELLO");

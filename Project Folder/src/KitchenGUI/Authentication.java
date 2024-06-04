@@ -67,8 +67,8 @@ public class Authentication extends JFrame {
         panel.add(passField,gbc);
 
 
-        ImageIcon loginB = new ImageIcon("Project Folder/data/Images/LoginUI/button_login.png");
-        ImageIcon loginHover = new ImageIcon("Project Folder/data/Images/LoginUI/button_login_hover.png");
+        ImageIcon loginB = new ImageIcon("Project Folder/src/main/resources/button_login.png");
+        ImageIcon loginHover = new ImageIcon("Project Folder/src/main/resources/button_login_hover.png");
         loginButton = new JButton(loginB);
         loginButton.setPreferredSize(new Dimension(loginB.getIconWidth(),loginB.getIconHeight()));
         loginButton.setBorder(null);
